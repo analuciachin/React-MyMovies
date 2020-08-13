@@ -1,7 +1,7 @@
-import React from 'react';
-import Nav from './Nav';
+import React from 'react'
+import Nav from './Nav'
+import MovieDetail from './MovieDetail'
 import { fetchMovieReview } from '../utils/api'
-
 
 export default class App extends React.Component {
 
@@ -27,10 +27,13 @@ export default class App extends React.Component {
   }
 
   render() {
+    const { movies } = this.state
+
     return (
       <div className='container'>
         <Nav />
-        <pre>{JSON.stringify(this.state.movies, null, 2)}</pre>
+        {/*<pre>{JSON.stringify(this.state.movies, null, 2)}</pre>*/}
+        <MovieDetail movies={movies} />
       </div>
     );
   }
