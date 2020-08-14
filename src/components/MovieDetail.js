@@ -7,7 +7,8 @@ export default class MovieDetail extends React.Component {
         super(props)
     
         this.state = {
-            showMenu: false
+            showMenu: false,
+            bookSelected: null
         }
 
         this.showMenu = this.showMenu.bind(this)
@@ -16,7 +17,7 @@ export default class MovieDetail extends React.Component {
 
     showMenu(event) {
         event.preventDefault();
-        
+
         this.setState({
             showMenu: true,
         }, () => {
@@ -45,14 +46,14 @@ export default class MovieDetail extends React.Component {
                     return (
                         <li key={url} className='movie bg-light'>
                             <div className='main-content'>
-                                <button onClick={this.showMenu}>
+                                <button id={url} onClick={this.showMenu}>
                                     <FaPlusCircle color='#990000' size={22} />
                                 </button>
                                 
                                 { showMenu 
                                     ? (              
                                         <div
-                                            id = {url}
+                                            id='menu'
                                             className='menu'
                                         >
                                             <button className='btn-status'> Wish List </button>
@@ -63,7 +64,6 @@ export default class MovieDetail extends React.Component {
                                         null
                                     )
                                 }
-
 
                                 <h1 className='center-text movie-title-margin'>{display_title}</h1>
                                 <ul className='card-list'>
