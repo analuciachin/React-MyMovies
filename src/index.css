@@ -86,3 +86,17 @@ li {
 .movie-title-margin {
   margin: 0 0 30px 0;
 }
+
+.btn-status {
+  font-size: 12px;
+  color: #0000b3;
+}
+
+.btn-status:hover {
+  background: #808080;
+}
+
+button {
+  border-style: none;
+  background-color: transparent;
+}
