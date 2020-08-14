@@ -12,6 +12,7 @@ export default class App extends React.Component {
       selectedStatus: 'all',
       rate: null,
       movies: [],
+      myMovies: [],
       error: null
     }
 
@@ -36,9 +37,9 @@ export default class App extends React.Component {
       status: 'wish_list',
       rate: null
     }))
-    
+
     this.setState({
-      movies: newMovies
+      myMovies: newMovies
     })
   } 
 
@@ -48,8 +49,8 @@ export default class App extends React.Component {
     return (
       <div className='container'>
         <Nav />
-        <pre>{JSON.stringify(this.state.movies, null, 2)}</pre>
-        {/*<MovieDetail movies={movies} />*/}
+        {/*<pre>{JSON.stringify(this.state.myMovies, null, 2)}</pre>*/}
+        <MovieDetail movies={movies} />
       </div>
     );
   }

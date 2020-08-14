@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaCheckCircle, FaPlusCircle, FaRegCalendarAlt, FaRegFileAlt, FaRegUser } from 'react-icons/fa'
+import { IoIosArrowDropdownCircle, IoIosArrowDropupCircle } from 'react-icons/io'
 
 export default class MovieDetail extends React.Component {
 
@@ -8,6 +9,7 @@ export default class MovieDetail extends React.Component {
     
         this.state = {
             showMenu: false,
+            menuOpen: false,
             bookSelected: null
         }
 
@@ -20,6 +22,7 @@ export default class MovieDetail extends React.Component {
 
         this.setState({
             showMenu: true,
+            menuOpen: true,
         }, () => {
             document.addEventListener('click', this.closeMenu)
         });
@@ -29,6 +32,7 @@ export default class MovieDetail extends React.Component {
         if (!event.target.closest('.menu')) {
             this.setState({
                 showMenu: false,
+                menuOpen: false,
             }, () => {
                 document.removeEventListener('click', this.closeMenu)
             });
@@ -36,7 +40,7 @@ export default class MovieDetail extends React.Component {
     }
 
     render () {
-        const { showMenu} = this.state
+        const { showMenu, menuOpen } = this.state
 
         return (
             <ul className='grid space-around'>
@@ -46,9 +50,22 @@ export default class MovieDetail extends React.Component {
                     return (
                         <li key={url} className='movie bg-light'>
                             <div className='main-content'>
-                                <button id={url} onClick={this.showMenu}>
-                                    <FaPlusCircle color='#990000' size={22} />
+                                { menuOpen
+                                    ? (
+                                    <button id={url} onClick={this.showMenu}>
+                                        <IoIosArrowDropupCircle color='#990000' size={22} />
+                                    </button>
+                                    )
+                                    : (
+                                    <button id={url} onClick={this.showMenu}>
+                                        <IoIosArrowDropdownCircle color='#990000' size={22} />
+                                    </button>
+                                    )
+                                }
+                               {/* <button id={url} onClick={this.showMenu}>
+                                    <IoIosArrowDropdownCircle color='#990000' size={22} />
                                 </button>
+                                */}
                                 
                                 { showMenu 
                                     ? (              
