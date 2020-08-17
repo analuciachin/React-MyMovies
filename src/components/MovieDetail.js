@@ -41,10 +41,11 @@ export default class MovieDetail extends React.Component {
 
     render () {
         const { showMenu, menuOpen } = this.state
+        const { movies, onDisableMovieStatus, btnWishList, btnWatched } = this.props
 
         return (
             <ul className='grid space-around'>
-                {this.props.movies.map((movie) => {
+                { movies.map((movie) => {
                     const { display_title, opening_date, byline, summary_short, link } = movie
                     const { url } = link
                     return (
@@ -52,7 +53,7 @@ export default class MovieDetail extends React.Component {
                             <div className='main-content'>
                                 { menuOpen
                                     ? (
-                                    <button id={url} onClick={this.showMenu}>
+                                    <button id={url} onClick={this.showMenu, () => onDisableMovieStatus(movie)}>
                                         <IoIosArrowDropupCircle color='#990000' size={22} />
                                     </button>
                                     )
@@ -62,10 +63,6 @@ export default class MovieDetail extends React.Component {
                                     </button>
                                     )
                                 }
-                               {/* <button id={url} onClick={this.showMenu}>
-                                    <IoIosArrowDropdownCircle color='#990000' size={22} />
-                                </button>
-                                */}
                                 
                                 { showMenu 
                                     ? (              
@@ -73,8 +70,8 @@ export default class MovieDetail extends React.Component {
                                             id='menu'
                                             className='menu'
                                         >
-                                            <button className='btn-status'> Wish List </button>
-                                            <button className='btn-status'> Watched </button>
+                                            <button className='btn-status' disabled={btnWishList}> Wish List </button>
+                                            <button className='btn-status' disabled={btnWatched}> Watched </button>
                                         </div>
                                     )
                                     : (

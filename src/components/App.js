@@ -13,10 +13,13 @@ export default class App extends React.Component {
       rate: null,
       movies: [],
       myMovies: [],
+      wishListBtn: false,
+      watchedBtn: false,
       error: null
     }
 
     this.addStatusRate = this.addStatusRate.bind(this)
+    this.disableMovieStatus = this.disableMovieStatus.bind(this)
   }
 
   componentDidMount () {
@@ -41,16 +44,32 @@ export default class App extends React.Component {
     this.setState({
       myMovies: newMovies
     })
-  } 
+  }
+  
+  disableMovieStatus = (movie) => {
+    const movieStatus = movie.status
+    
+    if (movieStatus === 'wish_list') {
+      this.setState({
+        wishListBtn: true
+      })
+    }
+    else if (movieStatus === 'watched') {
+      this.setState({
+        watchedBtn: true
+      })
+    }
+  }
 
   render() {
-    const { movies } = this.state
+    const { myMovies, wishListBtn, watchedBtn } = this.state
 
     return (
       <div className='container'>
         <Nav />
         {/*<pre>{JSON.stringify(this.state.myMovies, null, 2)}</pre>*/}
-        <MovieDetail movies={movies} />
+        <MovieDetail movies={myMovies} onDisableMovieStatus={this.disableMovieStatus} btnWishList={wishListBtn} 
+                    btnWatched={watchedBtn} />
       </div>
     );
   }
