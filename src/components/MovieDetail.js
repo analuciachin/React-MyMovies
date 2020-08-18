@@ -44,8 +44,8 @@ export default class MovieDetail extends React.Component {
     }
 
     render () {
-        const { showMenu, menuOpen } = this.state
-        const { movies, onDisableMovieStatus, btnWishList, btnWatched, onSelectMovie } = this.props
+        //const { showMenu, menuOpen } = this.state
+        const { movies, onDisableMovieStatus, btnWishList, btnWatched, onSelectMovie, onChangeStatusToWishList } = this.props
 
         return (
             <ul className='grid space-around'>
@@ -74,8 +74,13 @@ export default class MovieDetail extends React.Component {
                                             id='menu'
                                             className='menu'
                                         >
-                                            <button className='btn-status' disabled={btnWishList}> Wish List </button>
-                                            <button className='btn-status' disabled={btnWatched}> Watched </button>
+                                            <button id='wish_list' className='btn-status' disabled={btnWishList} 
+                                                onClick={() => onChangeStatusToWishList(movie)}>
+                                                Wish List
+                                            </button>
+                                            <button id='watched' className='btn-status' disabled={btnWatched}>
+                                                Watched
+                                            </button>
                                         </div>
                                     )
                                     : (

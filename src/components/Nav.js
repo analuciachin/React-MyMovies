@@ -1,21 +1,42 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
-export default function Nav({ selected, onUpdateStatus }) {
-	const movieStatus = ['All', 'Wish List', 'Watched']
+const activeStyle = {
+    color: 'rgb(187, 46, 31)'
+}
 
-	return(
-		<ul className='flex-center'>
-			{movieStatus.map((status) => (
-				<li key={status}>
-					<button 
-						className='btn-clear nav-link'
-						style={status === selected ? { color: 'rgb(187,46,31)' } : null }
-						onClick={() => onUpdateStatus(status)}>
-						{status}	
-					</button>
-					
-				</li>
-			))}
-		</ul>
-	)
-}	
+export default function Nav () {
+    return (
+        <nav className='row space-between'>
+            <ul className='row nav'>
+                <li>
+                    <NavLink
+                        to='/'
+                        activeStyle={activeStyle}
+                        className='nav-link'
+                    >
+                        All
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink
+                        to='/wishlist'
+                        activeStyle={activeStyle}
+                        className='nav-link'
+                    >
+                        Wish List
+                    </NavLink>
+                </li>                
+                <li>
+                    <NavLink 
+                        to='/watched'
+                        activeStyle={activeStyle}
+                        className='nav-link'
+                        >
+                            Watched
+                    </NavLink>
+                </li>
+            </ul>
+        </nav>
+    )
+}

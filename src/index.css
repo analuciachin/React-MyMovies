@@ -109,3 +109,23 @@ button[disabled]{
   background-color: #cccccc;*/
   color: #666666;
 }
+
+.space-between {
+  justify-content: space-between;
+}
+
+.nav-link {
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav li {
+  margin-right: 10px;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+}

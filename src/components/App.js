@@ -1,7 +1,9 @@
 import React from 'react'
 import Nav from './Nav'
 import MovieDetail from './MovieDetail'
+import WishList from './WishList'
 import { fetchMovieReview } from '../utils/api'
+import { Route } from 'react-router-dom'
 
 export default class App extends React.Component {
 
@@ -20,10 +22,9 @@ export default class App extends React.Component {
 
     this.addNewKeys = this.addNewKeys.bind(this)
     this.disableMovieStatus = this.disableMovieStatus.bind(this)
-    //this.changeMovieStatus = this.changeMovieStatus.bind(this)
     this.selectMovie = this.selectMovie.bind(this)
-    //this.selectMovieV1 = this.selectMovieV1.bind(this)
     this.unselectMovies = this.unselectMovies.bind(this)
+    this.changeStatusToWishList = this.changeStatusToWishList.bind(this)
   }
 
   componentDidMount () {
@@ -64,9 +65,8 @@ export default class App extends React.Component {
     const myMoviesCopy = [...this.state.myMovies];
     const url = movie.link.url;
     const index = myMoviesCopy.findIndex(movie => movie.link.url === url);
-    //console.log(index)
     myMoviesCopy[index].selected = true;
-    this.setState({ myMovies: myMoviesCopy}, () => console.log(this.state.myMovies))
+    this.setState({ myMovies: myMoviesCopy})
   }
 
   unselectMovies () {
@@ -78,13 +78,22 @@ export default class App extends React.Component {
 
     this.setState({
       myMovies: updateMovies
-    }, () => console.log('unselected movies' , this.state.myMovies))
+    })
+  }
+
+  changeStatusToWishList (movie) {
+    //const currentStatus = movie.status
+    console.log(movie.status)
+    const myMoviesCopy = [...this.state.myMovies];
+    const url = movie.link.url;
+    const index = myMoviesCopy.findIndex(movie => movie.link.url === url);
+    myMoviesCopy[index].status = 'wish_list';
+    this.setState({ myMovies: myMoviesCopy}, () => console.log(this.state.myMovies))
   }
 
   disableMovieStatus = (movie) => {
     const movieStatus = movie.status
     const movieSelected = movie.link.url
-    //console.log(movieSelected)
 
     if (movieStatus === 'wish_list') {
       this.setState({
@@ -101,12 +110,48 @@ export default class App extends React.Component {
   render() {
     const { myMovies, wishListBtn, watchedBtn } = this.state
 
+    /*
+              <WishList
+            movies={myMovies}
+            disableMovieStatus={this.disableMovieStatus}
+            wishListBtn={wishListBtn} 
+            btnWatched={watchedBtn} 
+            selectMovie={this.selectMovie} 
+            unselectMovies={this.unselectMovies}
+            changeToWishList={this.changeStatusToWishList}
+          />
+    */
+
     return (
       <div className='container'>
-        <Nav />
-        {/*<pre>{JSON.stringify(this.state.myMovies, null, 2)}</pre>*/}
-        <MovieDetail movies={myMovies} onDisableMovieStatus={this.disableMovieStatus} btnWishList={wishListBtn} 
-                    btnWatched={watchedBtn} onSelectMovie={this.selectMovie} onUnselectMovies={this.unselectMovies}/>
+        <Route exact path="/" render={() => (
+          <div>
+            <Nav />
+            {/*<pre>{JSON.stringify(this.state.myMovies, null, 2)}</pre>*/}
+            <MovieDetail 
+              movies={myMovies} 
+              onDisableMovieStatus={this.disableMovieStatus}
+              btnWishList={wishListBtn}           
+              btnWatched={watchedBtn} 
+              onSelectMovie={this.selectMovie} 
+              onUnselectMovies={this.unselectMovies}
+              onChangeStatusToWishList={this.changeStatusToWishList}
+            />
+          </div>
+        )} />
+
+        <Route exact path="/wishlist" render={() => (
+            <WishList
+            movies={myMovies}
+            disableMovieStatus={this.disableMovieStatus}
+            wishListBtn={wishListBtn} 
+            btnWatched={watchedBtn} 
+            selectMovie={this.selectMovie} 
+            unselectMovies={this.unselectMovies}
+            changeToWishList={this.changeStatusToWishList}
+          />
+        )} />
+
       </div>
     );
   }
