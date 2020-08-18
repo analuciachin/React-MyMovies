@@ -10,15 +10,18 @@ export default class MovieDetail extends React.Component {
         this.state = {
             showMenu: false,
             menuOpen: false,
-            bookSelected: null
         }
 
         this.showMenu = this.showMenu.bind(this)
         this.closeMenu = this.closeMenu.bind(this)
     }
 
-    showMenu(event) {
+    showMenu(event, movie) {
+        
         event.preventDefault();
+        const { onSelectMovie } = this.props
+
+        onSelectMovie(movie)
 
         this.setState({
             showMenu: true,
@@ -28,7 +31,7 @@ export default class MovieDetail extends React.Component {
         });
     }
 
-    closeMenu(event) {
+    closeMenu(event, movie) {
         if (!event.target.closest('.menu')) {
             this.setState({
                 showMenu: false,
@@ -41,30 +44,30 @@ export default class MovieDetail extends React.Component {
 
     render () {
         const { showMenu, menuOpen } = this.state
-        const { movies, onDisableMovieStatus, btnWishList, btnWatched } = this.props
+        const { movies, onDisableMovieStatus, btnWishList, btnWatched, onSelectMovie } = this.props
 
         return (
             <ul className='grid space-around'>
                 { movies.map((movie) => {
-                    const { display_title, opening_date, byline, summary_short, link } = movie
+                    const { display_title, opening_date, byline, summary_short, link, selected } = movie
                     const { url } = link
                     return (
                         <li key={url} className='movie bg-light'>
                             <div className='main-content'>
                                 { menuOpen
                                     ? (
-                                    <button id={url} onClick={this.showMenu, () => onDisableMovieStatus(movie)}>
+                                    <button id={url} onClick={(event) => this.showMenu(event, movie)}>
                                         <IoIosArrowDropupCircle color='#990000' size={22} />
                                     </button>
                                     )
                                     : (
-                                    <button id={url} onClick={this.showMenu}>
+                                    <button id={url} onClick={(event) => this.showMenu(event, movie)}>
                                         <IoIosArrowDropdownCircle color='#990000' size={22} />
                                     </button>
                                     )
                                 }
                                 
-                                { showMenu 
+                                { selected
                                     ? (              
                                         <div
                                             id='menu'

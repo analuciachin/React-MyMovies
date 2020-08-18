@@ -20,6 +20,9 @@ export default class App extends React.Component {
 
     this.addStatusRate = this.addStatusRate.bind(this)
     this.disableMovieStatus = this.disableMovieStatus.bind(this)
+    //this.changeMovieStatus = this.changeMovieStatus.bind(this)
+    this.selectMovie = this.selectMovie.bind(this)
+    //this.selectMovieV1 = this.selectMovieV1.bind(this)
   }
 
   componentDidMount () {
@@ -35,9 +38,10 @@ export default class App extends React.Component {
 
   addStatusRate () {
     const { movies } = this.state
-    const newMovies = movies.map(movies => ({
-      ...movies,
-      status: 'wish_list',
+    const newMovies = movies.map(movie => ({
+      ...movie,
+      status: 'all',
+      selected: false,
       rate: null
     }))
 
@@ -45,10 +49,34 @@ export default class App extends React.Component {
       myMovies: newMovies
     })
   }
-  
+/*
+  selectMovie (movie) {
+    this.setState(({ movie }) => ({
+      movie: {
+        ...movie,
+        selected: true
+      }
+    }),() => console.log(movie))
+  }
+*/
+  selectMovie (movie) {
+    const myMoviesCopy = [...this.state.myMovies];
+    const url = movie.link.url;
+    const index = myMoviesCopy.findIndex(movie => movie.link.url === url);
+    //console.log(index)
+    myMoviesCopy[index].selected = true;
+    this.setState({ myMovies: myMoviesCopy}, () => console.log(this.state.myMovies))
+  }
+
+  unselectMovie (movie) {
+    
+  }
+
   disableMovieStatus = (movie) => {
     const movieStatus = movie.status
-    
+    const movieSelected = movie.link.url
+    //console.log(movieSelected)
+
     if (movieStatus === 'wish_list') {
       this.setState({
         wishListBtn: true
@@ -69,7 +97,7 @@ export default class App extends React.Component {
         <Nav />
         {/*<pre>{JSON.stringify(this.state.myMovies, null, 2)}</pre>*/}
         <MovieDetail movies={myMovies} onDisableMovieStatus={this.disableMovieStatus} btnWishList={wishListBtn} 
-                    btnWatched={watchedBtn} />
+                    btnWatched={watchedBtn} onSelectMovie={this.selectMovie} />
       </div>
     );
   }
