@@ -9,7 +9,6 @@ export default class MovieDetail extends React.Component {
     
         this.state = {
             showMenu: false,
-            menuOpen: false,
         }
 
         this.showMenu = this.showMenu.bind(this)
@@ -25,17 +24,19 @@ export default class MovieDetail extends React.Component {
 
         this.setState({
             showMenu: true,
-            menuOpen: true,
         }, () => {
             document.addEventListener('click', this.closeMenu)
         });
     }
 
     closeMenu(event, movie) {
+        
+        const { onUnselectMovies } = this.props
+        onUnselectMovies()
+
         if (!event.target.closest('.menu')) {
             this.setState({
                 showMenu: false,
-                menuOpen: false,
             }, () => {
                 document.removeEventListener('click', this.closeMenu)
             });
@@ -54,7 +55,7 @@ export default class MovieDetail extends React.Component {
                     return (
                         <li key={url} className='movie bg-light'>
                             <div className='main-content'>
-                                { menuOpen
+                                { selected
                                     ? (
                                     <button id={url} onClick={(event) => this.showMenu(event, movie)}>
                                         <IoIosArrowDropupCircle color='#990000' size={22} />

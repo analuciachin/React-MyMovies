@@ -23,6 +23,7 @@ export default class App extends React.Component {
     //this.changeMovieStatus = this.changeMovieStatus.bind(this)
     this.selectMovie = this.selectMovie.bind(this)
     //this.selectMovieV1 = this.selectMovieV1.bind(this)
+    this.unselectMovies = this.unselectMovies.bind(this)
   }
 
   componentDidMount () {
@@ -68,8 +69,16 @@ export default class App extends React.Component {
     this.setState({ myMovies: myMoviesCopy}, () => console.log(this.state.myMovies))
   }
 
-  unselectMovie (movie) {
-    
+  unselectMovies () {
+    const { movies } = this.state
+    const updateMovies = movies.map(movie => ({
+      ...movie,
+      selected: false
+    }))
+
+    this.setState({
+      myMovies: updateMovies
+    }, () => console.log('unselected movies' , this.state.myMovies))
   }
 
   disableMovieStatus = (movie) => {
@@ -97,7 +106,7 @@ export default class App extends React.Component {
         <Nav />
         {/*<pre>{JSON.stringify(this.state.myMovies, null, 2)}</pre>*/}
         <MovieDetail movies={myMovies} onDisableMovieStatus={this.disableMovieStatus} btnWishList={wishListBtn} 
-                    btnWatched={watchedBtn} onSelectMovie={this.selectMovie} />
+                    btnWatched={watchedBtn} onSelectMovie={this.selectMovie} onUnselectMovies={this.unselectMovies}/>
       </div>
     );
   }
