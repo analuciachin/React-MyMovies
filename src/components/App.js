@@ -18,7 +18,7 @@ export default class App extends React.Component {
       error: null
     }
 
-    this.addStatusRate = this.addStatusRate.bind(this)
+    this.addNewKeys = this.addNewKeys.bind(this)
     this.disableMovieStatus = this.disableMovieStatus.bind(this)
     //this.changeMovieStatus = this.changeMovieStatus.bind(this)
     this.selectMovie = this.selectMovie.bind(this)
@@ -31,13 +31,13 @@ export default class App extends React.Component {
       .then((data) => this.setState({
         movies: data.results,
         error: null
-      }, this.addStatusRate))
+      }, this.addNewKeys))
       .catch((error) => {
         console.warn('Error fetching data: ', error)
       })
   }
 
-  addStatusRate () {
+  addNewKeys () {
     const { movies } = this.state
     const newMovies = movies.map(movie => ({
       ...movie,
