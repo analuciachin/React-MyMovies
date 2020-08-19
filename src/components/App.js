@@ -142,8 +142,6 @@ export default class App extends React.Component {
 */}
             <MovieDetail 
               movies={myMovies} 
-              onSelectMovie={this.selectMovie} 
-              onUnselectMovies={this.unselectMovies}
               onChangeStatusToWishList={this.changeStatusToWishList}
               onShowMenu={this.showMenu}
             />
@@ -155,10 +153,7 @@ export default class App extends React.Component {
             <Nav />
             <WishList
               movies={myMovies}
-              selectMovie={this.selectMovie}
-              unselectMovies={this.unselectMovies}
-              changeToWishList={this.changeStatusToWishList}
-              showMenu={this.showMenu}
+              onShowMenu={this.showMenu}
             />
           </div>
         )} />

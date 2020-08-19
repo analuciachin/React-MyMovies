@@ -2,7 +2,7 @@ import React from 'react'
 import { FaCheckCircle, FaPlusCircle, FaRegCalendarAlt, FaRegFileAlt, FaRegUser } from 'react-icons/fa'
 import { IoIosArrowDropdownCircle, IoIosArrowDropupCircle } from 'react-icons/io'
 
-export default function MovieDetail ({ movies, onSelectMovie, onChangeStatusToWishList, onShowMenu }) {
+export default function MovieDetail ({ movies, onChangeStatusToWishList, onShowMenu }) {
 
 return (
     <ul className='grid space-around'>
