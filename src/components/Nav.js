@@ -12,6 +12,7 @@ export default function Nav () {
                 <li>
                     <NavLink
                         to='/'
+                        exact
                         activeStyle={activeStyle}
                         className='nav-link'
                     >
