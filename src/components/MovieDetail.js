@@ -7,7 +7,7 @@ export default function MovieDetail ({ movies, onChangeStatusToWishList, onShowM
 return (
     <ul className='grid space-around'>
         { movies.map((movie) => {
-            const { display_title, opening_date, byline, summary_short, link, isSelected } = movie
+            const { display_title, opening_date, byline, summary_short, link, isSelected, isWishListDisabled } = movie
             const { url } = link
             return (
                 <li key={url} className='movie bg-light'>
@@ -32,7 +32,7 @@ return (
                                     className='menu'
                                 >
                                     <button id='wish_list' className='btn-status' 
-                                        onClick={() => onChangeStatusToWishList(movie)}>
+                                        onClick={() => onChangeStatusToWishList(movie)} disabled={isWishListDisabled}>
                                         Wish List
                                     </button>
                                     <button id='watched' className='btn-status'>

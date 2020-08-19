@@ -13,7 +13,9 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      selectedStatus: 'all',
+      status: 'all',
+      isSelected: false,
+      isWishListDisabled: false,
       rate: null,
       movies: [],
       myMovies: [],
@@ -54,6 +56,7 @@ export default class App extends React.Component {
       ...movie,
       status: 'all',
       isSelected: false,
+      isWishListDisabled: false,
       rate: null
     }))
 
@@ -108,6 +111,8 @@ export default class App extends React.Component {
     const url = movie.link.url;
     const index = myMoviesCopy.findIndex(movie => movie.link.url === url);
     myMoviesCopy[index].status = 'wish_list';
+    myMoviesCopy[index].isSelected = false;
+    myMoviesCopy[index].isWishListDisabled = true;
     this.setState({ myMovies: myMoviesCopy})
   }
 
