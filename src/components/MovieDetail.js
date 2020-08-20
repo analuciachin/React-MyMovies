@@ -2,12 +2,12 @@ import React from 'react'
 import { FaCheckCircle, FaPlusCircle, FaRegCalendarAlt, FaRegFileAlt, FaRegUser } from 'react-icons/fa'
 import { IoIosArrowDropdownCircle, IoIosArrowDropupCircle } from 'react-icons/io'
 
-export default function MovieDetail ({ movies, onChangeStatusToWishList, onShowMenu }) {
+export default function MovieDetail ({ movies, onShowMenu, onChangeStatusToWishList, onChangeStatusToWatched }) {
 
 return (
     <ul className='grid space-around'>
         { movies.map((movie) => {
-            const { display_title, opening_date, byline, summary_short, link, isSelected, isWishListDisabled } = movie
+            const { display_title, opening_date, byline, summary_short, link, isSelected, isWishListDisabled, isWatchedDisabled } = movie
             const { url } = link
             return (
                 <li key={url} className='movie bg-light'>
@@ -15,16 +15,28 @@ return (
                         { isSelected
                             ? (
                             <button id={url} onClick={(event) => onShowMenu(event, movie)}>
-                                <IoIosArrowDropupCircle color='#990000' size={22} />
+                                <IoIosArrowDropupCircle color='#000066' size={22} />
                             </button>
                             )
                             : (
                             <button id={url} onClick={(event) => onShowMenu(event, movie)}>
-                                <IoIosArrowDropdownCircle color='#990000' size={22} />
+                                <IoIosArrowDropdownCircle color='#000066' size={22} />
                             </button>
                             )
                         }
                         
+                        { isWatchedDisabled &&
+                            <div className='icon-right'>
+                                <FaPlusCircle color='#b30000' size={26}/>
+                            </div>
+                        }
+
+                        { isWishListDisabled &&
+                            <div className='icon-right'>
+                                <FaCheckCircle color='#008000' size={26}/>
+                            </div>
+                        }
+
                         { isSelected
                             ? (              
                                 <div
@@ -35,7 +47,8 @@ return (
                                         onClick={() => onChangeStatusToWishList(movie)} disabled={isWishListDisabled}>
                                         Wish List
                                     </button>
-                                    <button id='watched' className='btn-status'>
+                                    <button id='watched' className='btn-status'
+                                        onClick={() => onChangeStatusToWatched(movie)} disabled={isWatchedDisabled}>
                                         Watched
                                     </button>
                                 </div>

@@ -57,7 +57,7 @@ li {
 .movie {
   margin: 10px 0;
   width: 250px;
-  height: 450px;
+  height: 500px;
   padding: 20px;
 }
 
@@ -66,7 +66,7 @@ li {
 }
 
 .main-content {
-  height: 400px;
+  height: 470px;
 }
 
 .card-list li {
@@ -128,4 +128,12 @@ button[disabled]{
 .row {
 	display: flex;
 	flex-direction: row;
+}
+
+.icon-right {
+  float: right;
+}
+
+.form-my-rate input {
+margin-left: 5px;
 }

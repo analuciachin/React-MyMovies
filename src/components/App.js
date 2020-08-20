@@ -2,6 +2,7 @@ import React from 'react'
 import Nav from './Nav'
 import MovieDetail from './MovieDetail'
 import WishList from './WishList'
+import Watched from './Watched'
 import { fetchMovieReview } from '../utils/api'
 import { Route } from 'react-router-dom'
 
@@ -13,10 +14,11 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      status: 'all',
-      isSelected: false,
-      isWishListDisabled: false,
-      rate: null,
+//      status: 'all',
+//      isSelected: false,
+//      isWishListDisabled: false,
+//      isWatchedDisabled: false,
+//      rate: '',
       movies: [],
       myMovies: [],
       error: null
@@ -27,7 +29,10 @@ export default class App extends React.Component {
     //this.selectMovie = this.selectMovie.bind(this)
     //this.unselectMovies = this.unselectMovies.bind(this)
     this.changeStatusToWishList = this.changeStatusToWishList.bind(this)
+    this.changeStatusToWatched = this.changeStatusToWatched.bind(this)
     this.showMenu = this.showMenu.bind(this)
+    this.getRate = this.getRate.bind(this)
+    this.handleSubmitRate = this.handleSubmitRate.bind(this)
   }
 
   componentDidMount () {
@@ -57,7 +62,8 @@ export default class App extends React.Component {
       status: 'all',
       isSelected: false,
       isWishListDisabled: false,
-      rate: null
+      isWatchedDisabled: false,
+      rate: ''
     }))
 
     this.setState({
@@ -113,7 +119,42 @@ export default class App extends React.Component {
     myMoviesCopy[index].status = 'wish_list';
     myMoviesCopy[index].isSelected = false;
     myMoviesCopy[index].isWishListDisabled = true;
+    myMoviesCopy[index].isWatchedDisabled = false;
     this.setState({ myMovies: myMoviesCopy})
+  }
+
+  changeStatusToWatched (movie) {
+    const myMoviesCopy = [...this.state.myMovies];
+    const url = movie.link.url;
+    const index = myMoviesCopy.findIndex(movie => movie.link.url === url);
+    myMoviesCopy[index].status = 'watched';
+    myMoviesCopy[index].isSelected = false;
+    myMoviesCopy[index].isWatchedDisabled = true;
+    myMoviesCopy[index].isWishListDisabled = false;
+    this.setState({ myMovies: myMoviesCopy})
+  }
+
+  getRate (event, movie) {
+    const myMoviesCopy = [...this.state.myMovies];
+    const url = movie.link.url;
+    const index = myMoviesCopy.findIndex(movie => movie.link.url === url);
+    myMoviesCopy[index].rate = event.target.value;
+    this.setState({ myMovies: myMoviesCopy }, () => console.log(this.state.myMovies))
+  }
+
+/*
+  getRate (event) {
+    this.setState({
+      rate: event.target.value
+    })
+  }
+*/
+  handleSubmitRate(event, movie) { 
+    event.preventDefault();
+    //alert('A rate was submitted: ' + this.state.rate);
+    this.setState({
+      rate: ''
+    })
   }
 
   /*
@@ -148,6 +189,7 @@ export default class App extends React.Component {
             <MovieDetail 
               movies={myMovies} 
               onChangeStatusToWishList={this.changeStatusToWishList}
+              onChangeStatusToWatched = {this.changeStatusToWatched}
               onShowMenu={this.showMenu}
             />
           </div>
@@ -159,6 +201,20 @@ export default class App extends React.Component {
             <WishList
               movies={myMovies}
               onShowMenu={this.showMenu}
+              onChangeStatusToWatched={this.changeStatusToWatched}
+            />
+          </div>
+        )} />
+
+        <Route exact path="/watched" render={() => (
+          <div>
+            <Nav />
+            <Watched
+              movies={myMovies}
+              onShowMenu={this.showMenu}
+              onChangeStatusToWishList={this.changeStatusToWishList}
+              onGetRate={this.getRate}
+              onHandleSubmitRate={this.handleSubmitRate}
             />
           </div>
         )} />

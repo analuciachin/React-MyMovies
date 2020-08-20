@@ -2,14 +2,14 @@ import React from 'react'
 import { FaCheckCircle, FaPlusCircle, FaRegCalendarAlt, FaRegFileAlt, FaRegUser } from 'react-icons/fa'
 import { IoIosArrowDropdownCircle, IoIosArrowDropupCircle } from 'react-icons/io'
 
-export default function WishList ({ movies, onShowMenu, onChangeStatusToWatched }) {
+export default function Watched ({ movies, onShowMenu, onChangeStatusToWishList, onGetRate, onHandleSubmitRate }) {
 
 return (
     <ul className='grid space-around'>
         { movies.map((movie) => {
-            const { display_title, opening_date, byline, summary_short, link, isSelected, isWishListDisabled, status } = movie
+            const { display_title, opening_date, byline, summary_short, link, isSelected, isWatchedDisabled, status, rate } = movie
             const { url } = link
-            return ( status === 'wish_list' &&
+            return ( status === 'watched' &&
                     <li key={url} className='movie bg-light'>
                         <div className='main-content'>
                             { isSelected
@@ -26,7 +26,7 @@ return (
                             }
 
                             <div className='icon-right'>
-                                <FaCheckCircle color='#008000' size={26}/>
+                                <FaPlusCircle color='#b30000' size={26}/>
                             </div>
 
                             { isSelected
@@ -35,10 +35,10 @@ return (
                                         id='menu'
                                         className='menu'
                                     >
-                                        <button id='wish_list' className='btn-status' disabled={isWishListDisabled}>
+                                        <button id='wish_list' className='btn-status' onClick={() => onChangeStatusToWishList(movie)}>
                                             Wish List
                                         </button>
-                                        <button id='watched' className='btn-status' onClick={() => onChangeStatusToWatched(movie)}>
+                                        <button id='watched' className='btn-status' disabled={isWatchedDisabled}>
                                             Watched
                                         </button>
                                     </div>
@@ -61,6 +61,15 @@ return (
                             </ul>
                             <h4 className='center-text'>Summary</h4>
                             <p>{summary_short}</p>    
+                            { rate === ''
+                              ? <form className='form-my-rate' onSubmit={(event) => onHandleSubmitRate(event, movie)}>
+                                    <label>My Rate: </label>
+                                    <input type='text' pattern='[0-9]*' id='my-rate' min='1' max='10' value={rate} onChange={(event) => onGetRate(event, movie)}/>
+                                    <input type='submit' />
+                                </form>
+                              :<p>My Rate: {rate}</p>
+                            }
+
                         </div>
                         <div>
                             <p className='center-text'><a href={url}>Review</a></p>
