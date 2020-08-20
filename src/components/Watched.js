@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaCheckCircle, FaPlusCircle, FaRegCalendarAlt, FaRegFileAlt, FaRegUser } from 'react-icons/fa'
+import { FaCheckCircle, FaRegCalendarAlt, FaRegFileAlt, FaRegUser } from 'react-icons/fa'
 import { IoIosArrowDropdownCircle, IoIosArrowDropupCircle } from 'react-icons/io'
 
 export default function Watched ({ movies, onShowMenu, onChangeStatusToWishList, onGetRate, onHandleSubmitRate, temp_rate }) {
@@ -26,7 +26,7 @@ return (
                             }
 
                             <div className='icon-right'>
-                                <FaPlusCircle color='#b30000' size={26}/>
+                                <FaCheckCircle color='#008000' size={26}/>
                             </div>
 
                             { isSelected
