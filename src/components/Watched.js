@@ -2,7 +2,7 @@ import React from 'react'
 import { FaCheckCircle, FaPlusCircle, FaRegCalendarAlt, FaRegFileAlt, FaRegUser } from 'react-icons/fa'
 import { IoIosArrowDropdownCircle, IoIosArrowDropupCircle } from 'react-icons/io'
 
-export default function Watched ({ movies, onShowMenu, onChangeStatusToWishList, onGetRate, onHandleSubmitRate }) {
+export default function Watched ({ movies, onShowMenu, onChangeStatusToWishList, onGetRate }) {
 
 return (
     <ul className='grid space-around'>
@@ -62,12 +62,13 @@ return (
                             <h4 className='center-text'>Summary</h4>
                             <p>{summary_short}</p>    
                             { rate === ''
-                              ? <form className='form-my-rate' onSubmit={(event) => onHandleSubmitRate(event, movie)}>
+                              ? <div className='div-my-rate'>
                                     <label>My Rate: </label>
-                                    <input type='text' pattern='[0-9]*' id='my-rate' min='1' max='10' value={rate} onChange={(event) => onGetRate(event, movie)}/>
-                                    <input type='submit' />
-                                </form>
-                              :<p>My Rate: {rate}</p>
+                                    <input type='number' id='my-rate' min='1' max='10' value={rate} onChange={(event) => onGetRate(event, movie)} />
+                                </div>    
+                              : <div className='div-my-rate'>
+                                    <p className='font-weight-bold'>My Rate: {rate}</p>
+                                </div>
                             }
 
                         </div>

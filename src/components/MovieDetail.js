@@ -7,7 +7,7 @@ export default function MovieDetail ({ movies, onShowMenu, onChangeStatusToWishL
 return (
     <ul className='grid space-around'>
         { movies.map((movie) => {
-            const { display_title, opening_date, byline, summary_short, link, isSelected, isWishListDisabled, isWatchedDisabled } = movie
+            const { display_title, opening_date, byline, summary_short, link, isSelected, isWishListDisabled, isWatchedDisabled, rate } = movie
             const { url } = link
             return (
                 <li key={url} className='movie bg-light'>
@@ -70,7 +70,13 @@ return (
                             </li>
                         </ul>
                         <h4 className='center-text'>Summary</h4>
-                        <p>{summary_short}</p>    
+                        <p>{summary_short}</p>   
+                        { rate !== ''
+                          ? <div className='div-my-rate'>
+                                <p className='font-weight-bold'>My Rate: {rate}</p>
+                            </div>
+                          : null  
+                        } 
                     </div>
                     <div>
                         <p className='center-text'><a href={url}>Review</a></p>
