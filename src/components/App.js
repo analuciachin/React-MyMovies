@@ -18,7 +18,7 @@ export default class App extends React.Component {
 //      isSelected: false,
 //      isWishListDisabled: false,
 //      isWatchedDisabled: false,
-//      rate: '',
+      temp_rate: '',
       movies: [],
       myMovies: [],
       error: null
@@ -133,7 +133,7 @@ export default class App extends React.Component {
     myMoviesCopy[index].isWishListDisabled = false;
     this.setState({ myMovies: myMoviesCopy})
   }
-
+/*
   getRate (event, movie) {
     const myMoviesCopy = [...this.state.myMovies];
     const url = movie.link.url;
@@ -141,19 +141,24 @@ export default class App extends React.Component {
     myMoviesCopy[index].rate = event.target.value;
     this.setState({ myMovies: myMoviesCopy }, () => console.log(this.state.myMovies))
   }
+*/
 
-/*
   getRate (event) {
     this.setState({
-      rate: event.target.value
+      temp_rate: event.target.value
     })
   }
-*/
+
   handleSubmitRate(event, movie) { 
     event.preventDefault();
     //alert('A rate was submitted: ' + this.state.rate);
-    this.setState({
-      rate: ''
+    const myMoviesCopy = [...this.state.myMovies];
+    const url = movie.link.url;
+    const index = myMoviesCopy.findIndex(movie => movie.link.url === url);
+    myMoviesCopy[index].rate = this.state.temp_rate;
+    this.setState({ 
+      myMovies: myMoviesCopy,
+      temp_rate: ''
     })
   }
 
