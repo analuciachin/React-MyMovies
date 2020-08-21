@@ -3,6 +3,7 @@ import Nav from './Nav'
 import MovieDetail from './MovieDetail'
 import WishList from './WishList'
 import Watched from './Watched'
+import Loading from './Loading'
 import { fetchMovieReview } from '../utils/api'
 import { Route } from 'react-router-dom'
 import { FaStar } from 'react-icons/fa'
@@ -15,10 +16,7 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-//      status: 'all',
-//      isSelected: false,
-//      isWishListDisabled: false,
-//      isWatchedDisabled: false,
+      loading: true,
       temp_rate: '',
       movies: [],
       myMovies: [],
@@ -26,9 +24,6 @@ export default class App extends React.Component {
     }
 
     this.addNewKeys = this.addNewKeys.bind(this)
-    //this.disableMovieStatus = this.disableMovieStatus.bind(this)
-    //this.selectMovie = this.selectMovie.bind(this)
-    //this.unselectMovies = this.unselectMovies.bind(this)
     this.changeStatusToWishList = this.changeStatusToWishList.bind(this)
     this.changeStatusToWatched = this.changeStatusToWatched.bind(this)
     this.showMenu = this.showMenu.bind(this)
@@ -45,7 +40,8 @@ export default class App extends React.Component {
         if (this._isMounted) {
           this.setState({
             movies: data.results,
-            error: null
+            error: null,
+            loading: false,
           }, this.addNewKeys)
       }})
       .catch((error) => {
@@ -72,16 +68,6 @@ export default class App extends React.Component {
       myMovies: newMovies
     })
   }
-/*
-  selectMovie (movie) {
-    this.setState(({ movie }) => ({
-      movie: {
-        ...movie,
-        selected: true
-      }
-    }),() => console.log(movie))
-  }
-*/
 
   showMenu (event, movie) {
     event.preventDefault();
@@ -93,27 +79,7 @@ export default class App extends React.Component {
     myMoviesCopy[index].isSelected = !isSelected;
     this.setState({ myMovies: myMoviesCopy}, () => this.state.myMovies)
   }
-/*
-  selectMovie (movie) {
-    const myMoviesCopy = [...this.state.myMovies];
-    const url = movie.link.url;
-    const index = myMoviesCopy.findIndex(movie => movie.link.url === url);
-    myMoviesCopy[index].selected = true;
-    this.setState({ myMovies: myMoviesCopy})
-  }
 
-  unselectMovies () {
-    const { movies } = this.state
-    const updateMovies = movies.map(movie => ({
-      ...movie,
-      selected: false
-    }))
-
-    this.setState({
-      myMovies: updateMovies
-    },() => console.log('unselectMovies', this.state.myMovies))
-  }
-*/
   changeStatusToWishList (movie) {
     const myMoviesCopy = [...this.state.myMovies];
     const url = movie.link.url;
@@ -144,7 +110,6 @@ export default class App extends React.Component {
 
   handleSubmitRate(event, movie) { 
     event.preventDefault();
-    //alert('A rate was submitted: ' + this.state.rate);
     const myMoviesCopy = [...this.state.myMovies];
     const url = movie.link.url;
     const index = myMoviesCopy.findIndex(movie => movie.link.url === url);
@@ -166,17 +131,29 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { myMovies } = this.state
+    const { myMovies, loading, error } = this.state
+
+    if(loading === true) {
+      return(
+        <Loading text='Fetching data' />
+      )
+    }
+
+    if(error) {
+      return (
+        <p className='center-text'>{error}</p>
+      )
+    }
 
     return (
       <div className='container'>
         <Route exact path="/" render={() => (
           <div>
-            <Nav />
 {/*
             <pre>{JSON.stringify(this.state.myMovies, null, 2)}</pre>
             {console.log(this.state.myMovies)}
 */}
+            <Nav />
             <MovieDetail 
               movies={myMovies} 
               onChangeStatusToWishList={this.changeStatusToWishList}

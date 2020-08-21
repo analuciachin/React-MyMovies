@@ -78,7 +78,7 @@ return (
 
                         </div>
                         <div>
-                            <p className='center-text'><a href={url} target='_blank'>Review</a></p>
+                            <p className='center-text'><a href={url} target='_blank' rel='noopener noreferrer'>Review</a></p>
                         </div>
                     </li>
                 )
