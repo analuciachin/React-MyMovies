@@ -1,9 +1,9 @@
 import apiConfig from './apiKeys'
 
-export function fetchMovieReview () {
+export function fetchMovieReview ({ start_date, end_date }) {
 
-    const start_date = new Date() - 60 ;
-    const end_date = new Date();
+	console.log(start_date)
+	console.log(end_date)
 	const endpoint = window.encodeURI(`https://api.nytimes.com/svc/movies/v2/reviews/picks.json?opening-date=2010-01-01;2020-01-01&api-key=${apiConfig.movieReviewKey}`)
     //console.log('start_date', start_date.toLocaleDateString());
     //console.log('end_date', end_date)

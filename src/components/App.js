@@ -4,6 +4,7 @@ import MovieDetail from './MovieDetail'
 import WishList from './WishList'
 import Watched from './Watched'
 import Loading from './Loading'
+import Search from './Search'
 import { fetchMovieReview } from '../utils/api'
 import { Route } from 'react-router-dom'
 import { FaStar } from 'react-icons/fa'
@@ -20,6 +21,8 @@ export default class App extends React.Component {
       temp_rate: '',
       movies: [],
       myMovies: [],
+      start_date: '',
+      end_date: '',
       error: null
     }
 
@@ -35,7 +38,7 @@ export default class App extends React.Component {
   componentDidMount () {
     this._isMounted = true;
     
-    fetchMovieReview()
+    fetchMovieReview(this.state.start_date, this.state.end_date)
       .then((data) => {
         if (this._isMounted) {
           this.setState({
@@ -125,13 +128,13 @@ export default class App extends React.Component {
     let stars=[]
 
     for(let i=0; i<rate; i++) {
-      stars.push(<FaStar key={i} color='#ffff00' size={34}/>)
+      stars.push(<FaStar key={i} color='#ffd700' size={34}/>)
     }
   return <div>{stars}</div>
   }
 
   render() {
-    const { myMovies, loading, error } = this.state
+    const { myMovies, loading, error, start_date, end_date } = this.state
 
     if(loading === true) {
       return(
@@ -154,6 +157,10 @@ export default class App extends React.Component {
             {console.log(this.state.myMovies)}
 */}
             <Nav />
+            <Search
+              start_date={start_date || new Date()}
+              end_date={end_date || new Date()}
+            />
             <MovieDetail 
               movies={myMovies} 
               onChangeStatusToWishList={this.changeStatusToWishList}
