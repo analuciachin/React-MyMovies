@@ -5,6 +5,7 @@ import WishList from './WishList'
 import Watched from './Watched'
 import { fetchMovieReview } from '../utils/api'
 import { Route } from 'react-router-dom'
+import { FaStar } from 'react-icons/fa'
 
 export default class App extends React.Component {
   
@@ -33,6 +34,7 @@ export default class App extends React.Component {
     this.showMenu = this.showMenu.bind(this)
     this.getRate = this.getRate.bind(this)
     this.handleSubmitRate = this.handleSubmitRate.bind(this)
+    this.displayStarRate = this.displayStarRate.bind(this)
   }
 
   componentDidMount () {
@@ -133,15 +135,6 @@ export default class App extends React.Component {
     myMoviesCopy[index].isWishListDisabled = false;
     this.setState({ myMovies: myMoviesCopy})
   }
-/*
-  getRate (event, movie) {
-    const myMoviesCopy = [...this.state.myMovies];
-    const url = movie.link.url;
-    const index = myMoviesCopy.findIndex(movie => movie.link.url === url);
-    myMoviesCopy[index].rate = event.target.value;
-    this.setState({ myMovies: myMoviesCopy }, () => console.log(this.state.myMovies))
-  }
-*/
 
   getRate (event) {
     this.setState({
@@ -162,23 +155,16 @@ export default class App extends React.Component {
     })
   }
 
-  /*
-  disableMovieStatus = (movie) => {
-    const movieStatus = movie.status
-    const movieSelected = movie.link.url
+  displayStarRate (movie) {
+    const { rate } = movie
+    let stars=[]
 
-    if (movieStatus === 'wish_list') {
-      this.setState({
-        wishListBtn: true
-      })
+    for(let i=0; i<rate; i++) {
+      stars.push(<FaStar key={i} color='#ffff00' size={34}/>)
     }
-    else if (movieStatus === 'watched') {
-      this.setState({
-        watchedBtn: true
-      })
-    }
+  return <div>{stars}</div>
   }
-*/
+
   render() {
     const { myMovies } = this.state
 
@@ -196,6 +182,7 @@ export default class App extends React.Component {
               onChangeStatusToWishList={this.changeStatusToWishList}
               onChangeStatusToWatched = {this.changeStatusToWatched}
               onShowMenu={this.showMenu}
+              onDisplayStarRate={this.displayStarRate}
             />
           </div>
         )} />
@@ -220,6 +207,7 @@ export default class App extends React.Component {
               onChangeStatusToWishList={this.changeStatusToWishList}
               onGetRate={this.getRate}
               onHandleSubmitRate={this.handleSubmitRate}
+              onDisplayStarRate={this.displayStarRate}
             />
           </div>
         )} />

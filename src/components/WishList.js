@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaHeart, FaRegCalendarAlt, FaRegFileAlt, FaRegUser } from 'react-icons/fa'
+import { FaHeart, FaRegCalendarAlt, FaRegUser } from 'react-icons/fa'
 import { IoIosArrowDropdownCircle, IoIosArrowDropupCircle } from 'react-icons/io'
 
 export default function WishList ({ movies, onShowMenu, onChangeStatusToWatched }) {

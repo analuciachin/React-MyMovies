@@ -1,8 +1,8 @@
 import React from 'react'
-import { FaCheckCircle, FaHeart, FaRegCalendarAlt, FaRegFileAlt, FaRegUser } from 'react-icons/fa'
+import { FaCheckCircle, FaHeart, FaRegCalendarAlt, FaRegUser } from 'react-icons/fa'
 import { IoIosArrowDropdownCircle, IoIosArrowDropupCircle } from 'react-icons/io'
 
-export default function MovieDetail ({ movies, onShowMenu, onChangeStatusToWishList, onChangeStatusToWatched }) {
+export default function MovieDetail ({ movies, onShowMenu, onChangeStatusToWishList, onChangeStatusToWatched, onDisplayStarRate }) {
 
 return (
     <ul className='grid space-around'>
@@ -73,7 +73,8 @@ return (
                         <p>{summary_short}</p>   
                         { rate !== ''
                           ? <div className='div-my-rate'>
-                                <p className='font-weight-bold'>My Rate: {rate}</p>
+                                {/*<p className='font-weight-bold'>My Rate: {rate}</p>*/}
+                                {onDisplayStarRate(movie)}
                             </div>
                           : null  
                         } 
