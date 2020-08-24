@@ -14,12 +14,12 @@ return (
                     <div className='main-content'>
                         { isSelected
                             ? (
-                            <button id={url} onClick={(event) => onShowMenu(event, movie)}>
+                            <button id={url} className='arrow-btn' onClick={(event) => onShowMenu(event, movie)}>
                                 <IoIosArrowDropupCircle color='#000066' size={22} />
                             </button>
                             )
                             : (
-                            <button id={url} onClick={(event) => onShowMenu(event, movie)}>
+                            <button id={url} className='arrow-btn' onClick={(event) => onShowMenu(event, movie)}>
                                 <IoIosArrowDropdownCircle color='#000066' size={22} />
                             </button>
                             )

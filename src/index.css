@@ -49,6 +49,7 @@ li {
   justify-content: space-around;
 }
 
+
 .bg-light {
   background: rgba(0, 0, 0, 0.08);
   border-radius: 3px;
@@ -91,6 +92,7 @@ li {
   font-size: 13px;
   font-weight: bold;
   color: blue;
+  cursor: pointer;
 }
 
 .btn-status:hover {
@@ -105,9 +107,13 @@ button {
 
 button:disabled,
 button[disabled]{
-  /*border: 1px solid #999999;
-  background-color: #cccccc;*/
   color: #666666;
+  cursor: not-allowed;
+  pointer-events: all !important;
+}
+
+.arrow-btn {
+  cursor: pointer;
 }
 
 .space-between {
@@ -153,4 +159,22 @@ margin-left: 8px;
   right: 0;
   margin-top: 20px;
   text-align: center;
+}
+
+.search-label {
+  font-size: 16px;
+  margin-right: 5px; 
+}
+
+.search-input {
+  margin-right: 15px;
+  padding: 5px;
+}
+
+.form-submit {
+  padding: 8px 14px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
 }

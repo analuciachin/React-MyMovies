@@ -11,7 +11,7 @@ import { FaStar } from 'react-icons/fa'
 
 export default class App extends React.Component {
   
-  _isMounted = false;
+//  _isMounted = false;
 
   constructor(props) {
     super(props)
@@ -23,6 +23,7 @@ export default class App extends React.Component {
       myMovies: [],
       start_date: '',
       end_date: '',
+      is_data_fetched: false,
       error: null
     }
 
@@ -33,8 +34,11 @@ export default class App extends React.Component {
     this.getRate = this.getRate.bind(this)
     this.handleSubmitRate = this.handleSubmitRate.bind(this)
     this.displayStarRate = this.displayStarRate.bind(this)
+    this.getStartDate = this.getStartDate.bind(this)
+    this.getEndDate = this.getEndDate.bind(this)
+    this.handleSubmitDates = this.handleSubmitDates.bind(this)
   }
-
+/*
   componentDidMount () {
     this._isMounted = true;
     
@@ -51,6 +55,7 @@ export default class App extends React.Component {
         console.warn('Error fetching data: ', error)
       })
   }
+*/
 
   componentWillUnmount() {
     this._isMounted = false;
@@ -133,14 +138,63 @@ export default class App extends React.Component {
   return <div>{stars}</div>
   }
 
-  render() {
-    const { myMovies, loading, error, start_date, end_date } = this.state
+  getStartDate (event) {
+    this.setState({
+      start_date: event.target.value
+    })
+  }
 
-    if(loading === true) {
+  getEndDate (event) {
+    this.setState({
+      end_date: event.target.value
+    })
+  }
+
+  handleSubmitDates (event) {
+//    this._isMounted = true;
+    const today = new Date()
+    console.log(today)
+
+ /*   if(this.state.start_date > this.state.end_date) {
+      alert("Invalid date range. Please select a start date before the end date.")
+      event.preventDefault()
+    }
+    else if(this.state.end_date > today) {
+      alert("Invalid end date. End date should not pass today's date")
+      event.preventDefault()
+    }
+    else {*/
+      console.log('submitForm function')
+      console.log('start_date', this.state.start_date)
+      console.log('end_date', this.state.end_date)
+  
+      fetchMovieReview(this.state.start_date, this.state.end_date)
+        .then((data) => {
+        //  if (this._isMounted) {
+            this.setState({
+              movies: data.results,
+              error: null,
+              loading: false,
+              is_data_fetched: true
+            }, this.addNewKeys)
+        //}
+        })
+        .catch((error) => {
+          console.warn('Error fetching data: ', error)
+        })
+ //   }
+    
+  }
+
+  render() {
+    const { myMovies, loading, error, start_date, end_date, is_data_fetched } = this.state
+
+/*    if(loading === true) {
       return(
         <Loading text='Fetching data' />
       )
     }
+*/
 
     if(error) {
       return (
@@ -155,19 +209,24 @@ export default class App extends React.Component {
 {/*
             <pre>{JSON.stringify(this.state.myMovies, null, 2)}</pre>
             {console.log(this.state.myMovies)}
-*/}
-            <Nav />
-            <Search
-              start_date={start_date || new Date()}
-              end_date={end_date || new Date()}
-            />
-            <MovieDetail 
-              movies={myMovies} 
-              onChangeStatusToWishList={this.changeStatusToWishList}
-              onChangeStatusToWatched = {this.changeStatusToWatched}
-              onShowMenu={this.showMenu}
-              onDisplayStarRate={this.displayStarRate}
-            />
+*/}  
+            { !is_data_fetched
+              ? <Search
+                  onChangeStartDate={this.getStartDate}
+                  onChangeEndDate={this.getEndDate}
+                  onSubmitForm={this.handleSubmitDates}
+                />
+              : <div>
+                  <Nav />
+                  <MovieDetail 
+                    movies={myMovies} 
+                    onChangeStatusToWishList={this.changeStatusToWishList}
+                    onChangeStatusToWatched = {this.changeStatusToWatched}
+                    onShowMenu={this.showMenu}
+                    onDisplayStarRate={this.displayStarRate}
+                  />
+              </div>
+            }
           </div>
         )} />
 

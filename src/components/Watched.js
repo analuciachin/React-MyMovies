@@ -14,12 +14,12 @@ return (
                         <div className='main-content'>
                             { isSelected
                                 ? (
-                                <button id={url} onClick={(event) => onShowMenu(event, movie)}>
+                                <button id={url} className='arrow-btn' onClick={(event) => onShowMenu(event, movie)}>
                                     <IoIosArrowDropupCircle color='#000066' size={22} />
                                 </button>
                                 )
                                 : (
-                                <button id={url} onClick={(event) => onShowMenu(event, movie)}>
+                                <button id={url} className='arrow-btn' onClick={(event) => onShowMenu(event, movie)}>
                                     <IoIosArrowDropdownCircle color='#000066' size={22} />
                                 </button>
                                 )
@@ -66,7 +66,7 @@ return (
                                     <form onSubmit={(event) => onHandleSubmitRate(event, movie)}>
                                         <label>My Rate: </label>
                                         <input type='number' id='my-rate' min='1' max='5' 
-                                            value={temp_rate} onChange={(event) => onGetRate(event, movie)} />
+                                            value={temp_rate} onChange={onGetRate} />
                                         <input type='submit' />
                                     </form>
                                 </div>    
