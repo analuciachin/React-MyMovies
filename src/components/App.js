@@ -37,6 +37,7 @@ export default class App extends React.Component {
     this.getStartDate = this.getStartDate.bind(this)
     this.getEndDate = this.getEndDate.bind(this)
     this.handleSubmitDates = this.handleSubmitDates.bind(this)
+    this.getMaxDate = this.getMaxDate.bind(this)
   }
 /*
   componentDidMount () {
@@ -150,12 +151,37 @@ export default class App extends React.Component {
     })
   }
 
+  getMaxDate() {
+    console.log('getMaxDate')
+    const today = new Date();
+    
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+    const year = today.getFullYear();
+    let maxDate;
+
+    if(day<10 && month<10) {
+      maxDate = year + '-0' + month + '-0' + day
+    }
+    else if(day<10 && month>10) {
+      maxDate = year + '-' + month + '-0' + day
+    }
+    else if(day>10 && month<10) {
+      maxDate = year + '-0' + month + '-' + day
+    }
+    else {
+      maxDate = year + '-' + month + '-' + day
+    }
+    return maxDate;
+    //document.getElementById('end-date').setAttribute('max',maxDate);
+  }
+
   handleSubmitDates (event) {
 //    this._isMounted = true;
     const today = new Date()
     console.log(today)
 
- /*   if(this.state.start_date > this.state.end_date) {
+    if(this.state.start_date > this.state.end_date) {
       alert("Invalid date range. Please select a start date before the end date.")
       event.preventDefault()
     }
@@ -163,7 +189,8 @@ export default class App extends React.Component {
       alert("Invalid end date. End date should not pass today's date")
       event.preventDefault()
     }
-    else {*/
+    else {
+      event.preventDefault()
       console.log('submitForm function')
       console.log('start_date', this.state.start_date)
       console.log('end_date', this.state.end_date)
@@ -182,7 +209,7 @@ export default class App extends React.Component {
         .catch((error) => {
           console.warn('Error fetching data: ', error)
         })
- //   }
+    }
     
   }
 
@@ -215,6 +242,7 @@ export default class App extends React.Component {
                   onChangeStartDate={this.getStartDate}
                   onChangeEndDate={this.getEndDate}
                   onSubmitForm={this.handleSubmitDates}
+                  onGetMaxDate={this.getMaxDate}
                 />
               : <div>
                   <Nav />
