@@ -152,7 +152,6 @@ export default class App extends React.Component {
   }
 
   getMaxDate() {
-    console.log('getMaxDate')
     const today = new Date();
     
     const month = today.getMonth() + 1;
@@ -173,7 +172,6 @@ export default class App extends React.Component {
       maxDate = year + '-' + month + '-' + day
     }
     return maxDate;
-    //document.getElementById('end-date').setAttribute('max',maxDate);
   }
 
   handleSubmitDates (event) {
@@ -214,7 +212,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { myMovies, loading, error, start_date, end_date, is_data_fetched } = this.state
+    const { myMovies, loading, error, is_data_fetched } = this.state
 
 /*    if(loading === true) {
       return(
