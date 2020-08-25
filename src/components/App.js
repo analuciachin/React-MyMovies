@@ -6,10 +6,11 @@ import Watched from './Watched'
 import Loading from './Loading'
 import Search from './Search'
 import { fetchMovieReview } from '../utils/api'
-import { Route } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 import { FaStar } from 'react-icons/fa'
 
-export default class App extends React.Component {
+
+class App extends React.Component {
 
   constructor(props) {
     super(props)
@@ -21,7 +22,6 @@ export default class App extends React.Component {
       myMovies: [],
       start_date: '',
       end_date: '',
-      is_data_fetched: false,
       error: null
     }
 
@@ -157,7 +157,7 @@ export default class App extends React.Component {
   handleSubmitDates (event) {
 
     const today = new Date()
-    console.log(today)
+    //console.log(today)
 
     if(this.state.start_date > this.state.end_date) {
       alert("Invalid date range. Please select a start date before the end date.")
@@ -169,7 +169,8 @@ export default class App extends React.Component {
     }
     else {
       event.preventDefault()
-      
+      this.props.history.push('/all')
+
       this.setState({
         loading: true
       }, () => fetchMovieReview(this.state.start_date, this.state.end_date)
@@ -178,7 +179,6 @@ export default class App extends React.Component {
                       movies: data.results,
                       error: null,
                       loading: false,
-                      is_data_fetched: true
                     }, this.addNewKeys)
                 })
                 .catch((error) => {
@@ -189,7 +189,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { myMovies, loading, error, is_data_fetched } = this.state
+    const { myMovies, loading, error } = this.state
 
     if(loading === true) {
       return(
@@ -205,40 +205,43 @@ export default class App extends React.Component {
       )
     }
 
+
     return (
       <div className='container'>
+
+
         <Route exact path="/" render={() => (
           <div>
-{/*
+            {/*
             <pre>{JSON.stringify(this.state.myMovies, null, 2)}</pre>
             {console.log(this.state.myMovies)}
-*/}  
-            { !is_data_fetched
-              ? <Search
+            */}            
+            <Search
                   onChangeStartDate={this.getStartDate}
                   onChangeEndDate={this.getEndDate}
                   onSubmitForm={this.handleSubmitDates}
                   onGetMaxDate={this.getMaxDate}
-                />
-              : <div>
-                  <Nav />
-                  {myMovies.length > 0
-                    ? <MovieDetail 
-                        movies={myMovies} 
-                        onChangeStatusToWishList={this.changeStatusToWishList}
-                        onChangeStatusToWatched = {this.changeStatusToWatched}
-                        onShowMenu={this.showMenu}
-                        onDisplayStarRate={this.displayStarRate}
-                      />
-                    : <p className='no-data'>No reviews for the chosen period.</p>
-                  }
-
-              </div>
-            }
+            />
           </div>
         )} />
 
-        <Route exact path="/wishlist" render={() => (
+        <Route path="/all" render={() => (
+          <div>
+            <Nav />
+            {myMovies.length > 0
+              ? <MovieDetail 
+                  movies={myMovies} 
+                  onChangeStatusToWishList={this.changeStatusToWishList}
+                  onChangeStatusToWatched = {this.changeStatusToWatched}
+                  onShowMenu={this.showMenu}
+                  onDisplayStarRate={this.displayStarRate}
+                />
+              : <p className='no-data'>No reviews for the chosen period.</p>
+            }
+        </div>
+        )} />
+
+        <Route path="/wishlist" render={() => (
           <div>
             <Nav />
             <WishList
@@ -249,7 +252,7 @@ export default class App extends React.Component {
           </div>
         )} />
 
-        <Route exact path="/watched" render={() => (
+        <Route path="/watched" render={() => (
           <div>
             <Nav />
             <Watched
@@ -268,3 +271,4 @@ export default class App extends React.Component {
   }
 }
 
+export default withRouter(App);

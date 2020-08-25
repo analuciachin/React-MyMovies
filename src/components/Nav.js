@@ -16,6 +16,15 @@ export default function Nav () {
                         activeStyle={activeStyle}
                         className='nav-link'
                     >
+                        Search
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink
+                        to='/all'
+                        activeStyle={activeStyle}
+                        className='nav-link'
+                    >
                         All
                     </NavLink>
                 </li>
