@@ -189,10 +189,7 @@ export default class App extends React.Component {
     }
     else {
       event.preventDefault()
-      console.log('submitForm function')
-      console.log('start_date', this.state.start_date)
-      console.log('end_date', this.state.end_date)
-  
+        
       fetchMovieReview(this.state.start_date, this.state.end_date)
         .then((data) => {
         //  if (this._isMounted) {
@@ -244,13 +241,17 @@ export default class App extends React.Component {
                 />
               : <div>
                   <Nav />
-                  <MovieDetail 
-                    movies={myMovies} 
-                    onChangeStatusToWishList={this.changeStatusToWishList}
-                    onChangeStatusToWatched = {this.changeStatusToWatched}
-                    onShowMenu={this.showMenu}
-                    onDisplayStarRate={this.displayStarRate}
-                  />
+                  {myMovies.length > 0
+                    ? <MovieDetail 
+                        movies={myMovies} 
+                        onChangeStatusToWishList={this.changeStatusToWishList}
+                        onChangeStatusToWatched = {this.changeStatusToWatched}
+                        onShowMenu={this.showMenu}
+                        onDisplayStarRate={this.displayStarRate}
+                      />
+                    : <p className='no-data'>No reviews for the chosen period.</p>
+                  }
+
               </div>
             }
           </div>
