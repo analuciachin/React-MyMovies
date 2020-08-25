@@ -10,14 +10,12 @@ import { Route } from 'react-router-dom'
 import { FaStar } from 'react-icons/fa'
 
 export default class App extends React.Component {
-  
-//  _isMounted = false;
 
   constructor(props) {
     super(props)
 
     this.state = {
-      loading: true,
+      loading: false,
       temp_rate: '',
       movies: [],
       myMovies: [],
@@ -39,24 +37,6 @@ export default class App extends React.Component {
     this.handleSubmitDates = this.handleSubmitDates.bind(this)
     this.getMaxDate = this.getMaxDate.bind(this)
   }
-/*
-  componentDidMount () {
-    this._isMounted = true;
-    
-    fetchMovieReview(this.state.start_date, this.state.end_date)
-      .then((data) => {
-        if (this._isMounted) {
-          this.setState({
-            movies: data.results,
-            error: null,
-            loading: false,
-          }, this.addNewKeys)
-      }})
-      .catch((error) => {
-        console.warn('Error fetching data: ', error)
-      })
-  }
-*/
 
   componentWillUnmount() {
     this._isMounted = false;
@@ -175,7 +155,7 @@ export default class App extends React.Component {
   }
 
   handleSubmitDates (event) {
-//    this._isMounted = true;
+
     const today = new Date()
     console.log(today)
 
@@ -189,34 +169,35 @@ export default class App extends React.Component {
     }
     else {
       event.preventDefault()
-        
-      fetchMovieReview(this.state.start_date, this.state.end_date)
-        .then((data) => {
-        //  if (this._isMounted) {
-            this.setState({
-              movies: data.results,
-              error: null,
-              loading: false,
-              is_data_fetched: true
-            }, this.addNewKeys)
-        //}
-        })
-        .catch((error) => {
-          console.warn('Error fetching data: ', error)
-        })
+      
+      this.setState({
+        loading: true
+      }, () => fetchMovieReview(this.state.start_date, this.state.end_date)
+                .then((data) => {
+                    this.setState({
+                      movies: data.results,
+                      error: null,
+                      loading: false,
+                      is_data_fetched: true
+                    }, this.addNewKeys)
+                })
+                .catch((error) => {
+                  console.warn('Error fetching data: ', error)
+                })
+      )
     }
-    
   }
 
   render() {
     const { myMovies, loading, error, is_data_fetched } = this.state
 
-/*    if(loading === true) {
+    if(loading === true) {
       return(
-        <Loading text='Fetching data' />
+        <div className='container'>
+          <Loading text='Fetching data' />
+        </div>
       )
     }
-*/
 
     if(error) {
       return (
