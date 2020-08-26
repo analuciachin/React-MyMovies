@@ -6,6 +6,7 @@ import Watched from './Watched'
 import Loading from './Loading'
 import Search from './Search'
 import Login from './Login'
+import Logout from './Logout'
 import { fetchMovieReview } from '../utils/api'
 import { Route, withRouter, Switch } from 'react-router-dom'
 import { FaStar } from 'react-icons/fa'
@@ -43,6 +44,7 @@ class App extends React.Component {
     this.getUsername = this.getUsername.bind(this)
     this.getPassword = this.getPassword.bind(this)
     this.login = this.login.bind(this)
+    this.logout = this.logout.bind(this)
   }
 
   componentWillUnmount() {
@@ -220,11 +222,15 @@ class App extends React.Component {
     else {
       this.props.history.push('/')
       this.setState({
-        login_error: 'Invalid login information.',
+        login_error: 'Invalid login information',
         username: '',
         password: ''
       })
     }
+  }
+
+  logout () {
+    this.props.history.push('/logout')
   }
 
   render() {
@@ -267,7 +273,7 @@ class App extends React.Component {
 
             <Route path="/search" render={() => (
               <div>
-    
+                <Logout logout={this.logout} />
                 <Nav />         
                 <Search
                       onChangeStartDate={this.getStartDate}
@@ -281,6 +287,7 @@ class App extends React.Component {
           
             <Route path="/all" render={() => (
               <div>
+                <Logout logout={this.logout} />
                 <Nav />
                 {myMovies.length > 0
                   ? <MovieDetail 
@@ -297,6 +304,7 @@ class App extends React.Component {
 
             <Route path="/wishlist" render={() => (
               <div>
+                <Logout logout={this.logout} />
                 <Nav />
                 <WishList
                   movies={myMovies}
@@ -308,6 +316,7 @@ class App extends React.Component {
 
             <Route path="/watched" render={() => (
               <div>
+                <Logout logout={this.logout} />
                 <Nav />
                 <Watched
                   movies={myMovies}
@@ -318,6 +327,17 @@ class App extends React.Component {
                   onDisplayStarRate={this.displayStarRate}
                 />
               </div>
+            )} />
+
+            <Route exact path="/logout" render={() => (
+              <Login
+                onGetUsername={this.getUsername}
+                onGetPassword={this.getPassword}
+                login={this.login}
+                username={username}
+                password={password}
+                login_error={login_error}
+              />
             )} />
 
           </Switch>

@@ -228,3 +228,15 @@ margin-left: 8px;
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+.logout-btn {
+  display: block;
+  height: 40px;
+  width: 80px;
+  border-radius: 50%;
+  border: none;
+  background-color: #6666ff;
+  color: #fff;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
