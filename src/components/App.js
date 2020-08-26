@@ -5,6 +5,7 @@ import WishList from './WishList'
 import Watched from './Watched'
 import Loading from './Loading'
 import Search from './Search'
+import Login from './Login'
 import { fetchMovieReview } from '../utils/api'
 import { Route, withRouter } from 'react-router-dom'
 import { FaStar } from 'react-icons/fa'
@@ -209,14 +210,18 @@ class App extends React.Component {
 
     return (
       <div className='container'>
+        {/*
+        <pre>{JSON.stringify(this.state.myMovies, null, 2)}</pre>
+        {console.log(this.state.myMovies)}
+        */}  
+
+        <Login />
 
 
+        {/*
         <Route exact path="/" render={() => (
           <div>
-            {/*
-            <pre>{JSON.stringify(this.state.myMovies, null, 2)}</pre>
-            {console.log(this.state.myMovies)}
-            */}   
+ 
             <Nav />         
             <Search
                   onChangeStartDate={this.getStartDate}
@@ -267,6 +272,8 @@ class App extends React.Component {
             />
           </div>
         )} />
+
+        */}
 
       </div>
     );
