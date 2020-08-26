@@ -157,14 +157,15 @@ class App extends React.Component {
   handleSubmitDates (event) {
 
     const today = new Date()
-    //console.log(today)
+    console.log('start_date',this.state.start_date)
+    console.log('end_date',this.state.end_date)
 
-    if(this.state.start_date > this.state.end_date) {
+    if(this.state.start_date > this.state.end_date && this.state.end_date !== '') {
       alert("Invalid date range. Please select a start date before the end date.")
       event.preventDefault()
     }
-    else if(this.state.end_date > today) {
-      alert("Invalid end date. End date should not pass today's date")
+    else if(this.state.start_date === '' || this.state.end_date === '' ) {
+      alert("Please select a date range.")
       event.preventDefault()
     }
     else {
@@ -215,7 +216,8 @@ class App extends React.Component {
             {/*
             <pre>{JSON.stringify(this.state.myMovies, null, 2)}</pre>
             {console.log(this.state.myMovies)}
-            */}            
+            */}   
+            <Nav />         
             <Search
                   onChangeStartDate={this.getStartDate}
                   onChangeEndDate={this.getEndDate}
