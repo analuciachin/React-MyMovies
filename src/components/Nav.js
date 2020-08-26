@@ -11,8 +11,7 @@ export default function Nav () {
             <ul className='row nav'>
                 <li>
                     <NavLink
-                        to='/'
-                        exact
+                        to='/search'
                         activeStyle={activeStyle}
                         className='nav-link'
                     >

@@ -7,7 +7,7 @@ import Loading from './Loading'
 import Search from './Search'
 import Login from './Login'
 import { fetchMovieReview } from '../utils/api'
-import { Route, withRouter } from 'react-router-dom'
+import { Route, withRouter, Switch } from 'react-router-dom'
 import { FaStar } from 'react-icons/fa'
 
 
@@ -23,7 +23,10 @@ class App extends React.Component {
       myMovies: [],
       start_date: '',
       end_date: '',
-      error: null
+      error: null,
+      username: '',
+      password: '',
+      login_error: ''
     }
 
     this.addNewKeys = this.addNewKeys.bind(this)
@@ -37,6 +40,9 @@ class App extends React.Component {
     this.getEndDate = this.getEndDate.bind(this)
     this.handleSubmitDates = this.handleSubmitDates.bind(this)
     this.getMaxDate = this.getMaxDate.bind(this)
+    this.getUsername = this.getUsername.bind(this)
+    this.getPassword = this.getPassword.bind(this)
+    this.login = this.login.bind(this)
   }
 
   componentWillUnmount() {
@@ -157,7 +163,6 @@ class App extends React.Component {
 
   handleSubmitDates (event) {
 
-    const today = new Date()
     console.log('start_date',this.state.start_date)
     console.log('end_date',this.state.end_date)
 
@@ -190,8 +195,40 @@ class App extends React.Component {
     }
   }
 
+  getUsername(event) {
+    this.setState({
+      username: event.target.value
+    })
+  }
+
+  getPassword(event) {
+    this.setState({
+      password: event.target.value
+    })
+  }
+
+  login (event) {
+    event.preventDefault()
+
+    if(this.state.username === 'abc' && this.state.password === '123') {
+      this.props.history.push('/search')
+      this.setState({
+        username: '',
+        password: ''
+      })
+    }
+    else {
+      this.props.history.push('/')
+      this.setState({
+        login_error: 'Invalid login information.',
+        username: '',
+        password: ''
+      })
+    }
+  }
+
   render() {
-    const { myMovies, loading, error } = this.state
+    const { myMovies, loading, error, username, password, login_error } = this.state
 
     if(loading === true) {
       return(
@@ -209,73 +246,82 @@ class App extends React.Component {
 
 
     return (
-      <div className='container'>
-        {/*
-        <pre>{JSON.stringify(this.state.myMovies, null, 2)}</pre>
-        {console.log(this.state.myMovies)}
-        */}  
+        <div className='container'>
+          {/*
+          <pre>{JSON.stringify(this.state.myMovies, null, 2)}</pre>
+          {console.log(this.state.myMovies)}
+          */}  
 
-        <Login />
+          <Switch>
+            <Route exact path="/" render={() => (
+              <Login
+                onGetUsername={this.getUsername}
+                onGetPassword={this.getPassword}
+                login={this.login}
+                username={username}
+                password={password}
+                login_error={login_error}
+              />
+            )} />
 
 
-        {/*
-        <Route exact path="/" render={() => (
-          <div>
- 
-            <Nav />         
-            <Search
-                  onChangeStartDate={this.getStartDate}
-                  onChangeEndDate={this.getEndDate}
-                  onSubmitForm={this.handleSubmitDates}
-                  onGetMaxDate={this.getMaxDate}
-            />
-          </div>
-        )} />
+            <Route path="/search" render={() => (
+              <div>
+    
+                <Nav />         
+                <Search
+                      onChangeStartDate={this.getStartDate}
+                      onChangeEndDate={this.getEndDate}
+                      onSubmitForm={this.handleSubmitDates}
+                      onGetMaxDate={this.getMaxDate}
+                />
+              </div>
+            )} />
 
-        <Route path="/all" render={() => (
-          <div>
-            <Nav />
-            {myMovies.length > 0
-              ? <MovieDetail 
-                  movies={myMovies} 
-                  onChangeStatusToWishList={this.changeStatusToWishList}
-                  onChangeStatusToWatched = {this.changeStatusToWatched}
+          
+            <Route path="/all" render={() => (
+              <div>
+                <Nav />
+                {myMovies.length > 0
+                  ? <MovieDetail 
+                      movies={myMovies} 
+                      onChangeStatusToWishList={this.changeStatusToWishList}
+                      onChangeStatusToWatched = {this.changeStatusToWatched}
+                      onShowMenu={this.showMenu}
+                      onDisplayStarRate={this.displayStarRate}
+                    />
+                  : <p className='no-data'>No reviews for the chosen period.</p>
+                }
+            </div>
+            )} />
+
+            <Route path="/wishlist" render={() => (
+              <div>
+                <Nav />
+                <WishList
+                  movies={myMovies}
                   onShowMenu={this.showMenu}
+                  onChangeStatusToWatched={this.changeStatusToWatched}
+                />
+              </div>
+            )} />
+
+            <Route path="/watched" render={() => (
+              <div>
+                <Nav />
+                <Watched
+                  movies={myMovies}
+                  onShowMenu={this.showMenu}
+                  onChangeStatusToWishList={this.changeStatusToWishList}
+                  onGetRate={this.getRate}
+                  onHandleSubmitRate={this.handleSubmitRate}
                   onDisplayStarRate={this.displayStarRate}
                 />
-              : <p className='no-data'>No reviews for the chosen period.</p>
-            }
+              </div>
+            )} />
+
+          </Switch>
         </div>
-        )} />
-
-        <Route path="/wishlist" render={() => (
-          <div>
-            <Nav />
-            <WishList
-              movies={myMovies}
-              onShowMenu={this.showMenu}
-              onChangeStatusToWatched={this.changeStatusToWatched}
-            />
-          </div>
-        )} />
-
-        <Route path="/watched" render={() => (
-          <div>
-            <Nav />
-            <Watched
-              movies={myMovies}
-              onShowMenu={this.showMenu}
-              onChangeStatusToWishList={this.changeStatusToWishList}
-              onGetRate={this.getRate}
-              onHandleSubmitRate={this.handleSubmitRate}
-              onDisplayStarRate={this.displayStarRate}
-            />
-          </div>
-        )} />
-
-        */}
-
-      </div>
     );
   }
 }
