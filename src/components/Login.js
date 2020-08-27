@@ -1,6 +1,7 @@
 import React from 'react'
+import Spinner from 'react-spinner-material'
 
-export default function Login ({ login, onGetUsername, onGetPassword, username, password, login_error }) {
+export default function Login ({ login, onGetUsername, onGetPassword, username, password, login_error, visible }) {
 
     return (
         <React.Fragment>
@@ -21,8 +22,12 @@ export default function Login ({ login, onGetUsername, onGetPassword, username, 
                     onChange={onGetPassword} value={password} />
                 <br />
                 <input type='submit' value='Login' className='login-btn'/>
+
+
             </form>
-            
+            <div className='center-spinner'>
+                <Spinner radius={40} color={"#ff4d6a"} stroke={3} visible={visible} />
+            </div>
         </React.Fragment>
     )
 }

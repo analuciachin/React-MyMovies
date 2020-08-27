@@ -7,7 +7,7 @@ import Loading from './Loading'
 import Search from './Search'
 import Login from './Login'
 import Logout from './Logout'
-import { fetchMovieReview } from '../utils/api'
+import { fetchMovieReview, simulateLogin } from '../utils/api'
 import { Route, withRouter, Switch } from 'react-router-dom'
 import { FaStar } from 'react-icons/fa'
 
@@ -27,7 +27,8 @@ class App extends React.Component {
       error: null,
       username: '',
       password: '',
-      login_error: ''
+      login_error: '',
+      is_visible: false
     }
 
     this.addNewKeys = this.addNewKeys.bind(this)
@@ -209,6 +210,7 @@ class App extends React.Component {
     })
   }
 
+  /*
   login (event) {
     event.preventDefault()
 
@@ -228,13 +230,44 @@ class App extends React.Component {
       })
     }
   }
+*/
+
+  login (event) {
+    event.preventDefault()
+    
+    this.setState({
+      is_visible: true
+    })
+
+    simulateLogin(this.state.username, this.state.password)
+      .then((sucess) => {
+        this.props.history.push('/search')
+        this.setState({
+          username: '',
+          password: '',
+          is_visible: false
+        })
+      })
+      .catch((reject) => {
+        this.props.history.push('/')
+        this.setState({
+          login_error: 'Invalid login information',
+          username: '',
+          password: '',
+          is_visible: false
+        })
+      })
+  }
 
   logout () {
-    this.props.history.push('/logout')
+    this.setState({
+      is_visible: false,
+      login_error: ''
+    }, this.props.history.push('/logout'))
   }
 
   render() {
-    const { myMovies, loading, error, username, password, login_error } = this.state
+    const { myMovies, loading, error, username, password, login_error, is_visible } = this.state
 
     if(loading === true) {
       return(
@@ -259,7 +292,7 @@ class App extends React.Component {
           */}  
 
           <Switch>
-            <Route exact path="/" render={() => (
+            <Route exact path='/' render={() => (
               <Login
                 onGetUsername={this.getUsername}
                 onGetPassword={this.getPassword}
@@ -267,11 +300,12 @@ class App extends React.Component {
                 username={username}
                 password={password}
                 login_error={login_error}
+                visible={is_visible}
               />
             )} />
 
 
-            <Route path="/search" render={() => (
+            <Route path='/search' render={() => (
               <div>
                 <Logout logout={this.logout} />
                 <Nav />         
@@ -285,7 +319,7 @@ class App extends React.Component {
             )} />
 
           
-            <Route path="/all" render={() => (
+            <Route path='/all' render={() => (
               <div>
                 <Logout logout={this.logout} />
                 <Nav />
@@ -302,7 +336,7 @@ class App extends React.Component {
             </div>
             )} />
 
-            <Route path="/wishlist" render={() => (
+            <Route path='/wishlist' render={() => (
               <div>
                 <Logout logout={this.logout} />
                 <Nav />
@@ -314,7 +348,7 @@ class App extends React.Component {
               </div>
             )} />
 
-            <Route path="/watched" render={() => (
+            <Route path='/watched' render={() => (
               <div>
                 <Logout logout={this.logout} />
                 <Nav />
@@ -329,7 +363,7 @@ class App extends React.Component {
               </div>
             )} />
 
-            <Route exact path="/logout" render={() => (
+            <Route exact path='/logout' render={() => (
               <Login
                 onGetUsername={this.getUsername}
                 onGetPassword={this.getPassword}
@@ -337,8 +371,11 @@ class App extends React.Component {
                 username={username}
                 password={password}
                 login_error={login_error}
+                visible={is_visible}
               />
             )} />
+
+           <Route render={() => <h1>404 - Page Not Found</h1>} />
 
           </Switch>
         </div>
