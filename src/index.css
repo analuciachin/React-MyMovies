@@ -249,4 +249,12 @@ margin-left: 8px;
   margin-top: 30px;
 }
 
+.login-img {
+  width: 80%;
+  height: auto;
+}
 
+
+.left-text {
+  text-align: left;
+}

@@ -10,6 +10,8 @@ import Logout from './Logout'
 import { fetchMovieReview, simulateLogin } from '../utils/api'
 import { Route, withRouter, Switch } from 'react-router-dom'
 import { FaStar } from 'react-icons/fa'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Container } from 'react-bootstrap'
 
 
 class App extends React.Component {
@@ -285,12 +287,12 @@ class App extends React.Component {
 
 
     return (
-        <div className='container'>
+        <Container>
           {/*
           <pre>{JSON.stringify(this.state.myMovies, null, 2)}</pre>
           {console.log(this.state.myMovies)}
           */}  
-
+          
           <Switch>
             <Route exact path='/' render={() => (
               <Login
@@ -378,7 +380,7 @@ class App extends React.Component {
            <Route render={() => <h1>404 - Page Not Found</h1>} />
 
           </Switch>
-        </div>
+        </Container>
     );
   }
 }
