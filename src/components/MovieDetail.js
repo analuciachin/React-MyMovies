@@ -11,7 +11,7 @@ return (
             const { display_title, opening_date, byline, summary_short, link, isSelected, isWishListDisabled, isWatchedDisabled, rate } = movie
             const { url } = link
             return (
-                <Card className='movie bg-light' style={{ width: '22rem', height: '30rem' }}>
+                <Card className='movie bg-light'>
                     <li key={url} >
                         { isSelected
                             ? (
@@ -57,10 +57,11 @@ return (
                             : (
                                 null
                             )
-                        }
+                        }                            
+
                         <Card.Body>
-                            <h2 className='center-text movie-title-margin'>{display_title}</h2>
-                            <ul className='card-list'>
+                            <div className='center-text movie-title'>{display_title}</div>
+                            <ul className='card-list' id='movie-date-byline'>
                                 <li>
                                     <FaRegCalendarAlt color='#595959' className='icon-margin' size={22} />
                                     {opening_date}
@@ -70,8 +71,8 @@ return (
                                     {byline}
                                 </li>
                             </ul>
-                            <h4 className='center-text movie-summary'>Summary</h4>
-                            <Card.Text>{summary_short}</Card.Text>   
+                            <div className='center-text movie-summary'>Summary</div>
+                            <div className='movie-text text-justify'>{summary_short}</div>   
                             { rate !== ''
                             ? <div className='div-my-rate'>
                                     {/*<p className='font-weight-bold'>My Rate: {rate}</p>*/}
