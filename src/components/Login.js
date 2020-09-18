@@ -35,19 +35,6 @@ export default function Login ({ login, onGetUsername, onGetPassword, username, 
                             </Button>
                         </Form.Group>
                     </Form>
-
-{/*                    <form method='post' className='center-text' onSubmit={login}>
-                        <label className='login-label'>Username</label>
-                        <input type='text' name='password' placeholder='Enter username' className='login-input' 
-                            onChange={onGetUsername} value={username} />
-                        <br />
-                        <label className='login-label'>Password</label>
-                        <input type='text' name='password' placeholder='Enter password' className='login-input' 
-                            onChange={onGetPassword} value={password} />
-                        <br />
-                        <input type='submit' value='Login' className='login-btn'/>
-                    </form>
-*/}
                 </Col>
             </Row>
             <Row>

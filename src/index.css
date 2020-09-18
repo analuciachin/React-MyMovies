@@ -56,10 +56,23 @@ li {
 }
 
 .movie {
-  margin: 10px 0;
-  width: 250px;
-  height: 500px;
-  padding: 20px;
+  position: relative;
+  margin: 0.7rem 0;
+  padding: 1.25rem;
+  width: 22rem; 
+  height: 30rem;
+}
+
+.movie-summary {
+  margin-top: 1.5rem;
+}
+
+.movie-review {
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+  margin-bottom: 1rem;
+
 }
 
 .center-text {
