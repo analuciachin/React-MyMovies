@@ -25,11 +25,9 @@ export default function Login ({ login, onGetUsername, onGetPassword, username, 
                     <Form method='post' className='center-text' onSubmit={login}>
                         <Form.Group controlId='formBasicLogin'>
                             <Form.Label className='d-flex align-items-start'>Username</Form.Label>
-                            <Form.Control type='username' placeholder='Enter username' className='mt-3 mb-3' onChange={onGetUsername} 
-                                value={username} />
+                            <Form.Control type='username' placeholder='Enter username' className='mt-3 mb-3' onChange={onGetUsername} value={username} />
                             <Form.Label className='d-flex align-items-start'>Password</Form.Label>
-                            <Form.Control type='password' placeholder='Enter password' className='mt-3 mb-5' onChange={onGetPassword} 
-                                value={password} />
+                            <Form.Control type='password' placeholder='Enter password' className='mt-3 mb-5' onChange={onGetPassword} value={password} />
                             <Button variant='primary' type='submit'>
                                 Submit
                             </Button>
