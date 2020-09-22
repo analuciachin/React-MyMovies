@@ -30,7 +30,7 @@ export default function Login ({ login, onGetUsername, onGetPassword, username, 
                             <Form.Label className='d-flex align-items-start'>Password</Form.Label>
                             <Form.Control type='password' placeholder='Enter password' className='mt-3 mb-5' onChange={onGetPassword} 
                                 value={password} />
-                            <Button variant="primary" type="submit">
+                            <Button variant='primary' type='submit'>
                                 Submit
                             </Button>
                         </Form.Group>

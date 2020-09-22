@@ -181,16 +181,19 @@ margin-left: 8px;
   text-align: center;
 }
 
+/*
 .search-label {
   font-size: 16px;
   margin-right: 5px; 
 }
-
+*/
+/*
 .search-input {
   margin-right: 15px;
   padding: 5px;
 }
-
+*/
+/*
 .form-submit {
   padding: 8px 14px;
   cursor: pointer;
@@ -198,6 +201,7 @@ margin-left: 8px;
   border: none;
   color: white;
 }
+*/
 
 .no-data {
   font-size: 22px;
@@ -289,7 +293,22 @@ margin-left: 8px;
 
   .movie-title {
     margin: 0 0 30px 0;
+    font-size: 1.7em;
+  }
+
+  .movie-summary {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
     font-size: 1em;
+    font-weight: bold;
+  }
+
+  .movie-review {
+    position: absolute;
+    bottom: 0;
+    right: 40%;
+    margin-bottom: 1rem;
+  
   }
   
 }
