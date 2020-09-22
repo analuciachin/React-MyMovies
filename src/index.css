@@ -81,7 +81,7 @@ li {
 .movie-review {
   position: absolute;
   bottom: 0;
-  right: 50%;
+  right: 40%;
   margin-bottom: 1rem;
 
 }
@@ -255,8 +255,8 @@ margin-left: 8px;
 
 .logout-btn {
   display: block;
-  height: 40px;
-  width: 80px;
+  height: 50px;
+  width: 90px;
   border-radius: 50%;
   border: none;
   background-color: #6666ff;
@@ -302,7 +302,7 @@ margin-left: 8px;
     font-size: 1em;
     font-weight: bold;
   }
-
+/*
   .movie-review {
     position: absolute;
     bottom: 0;
@@ -310,5 +310,5 @@ margin-left: 8px;
     margin-bottom: 1rem;
   
   }
-  
+*/
 }

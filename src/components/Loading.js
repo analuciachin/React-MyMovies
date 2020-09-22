@@ -1,4 +1,5 @@
 import  React from 'react'
+import { Row, Col } from 'react-bootstrap'
 
 export default class Loading extends React.Component {
     _isMounted = false;
@@ -33,11 +34,14 @@ export default class Loading extends React.Component {
 
     render() {
         return (
-            <p className='loading'>
-                {this.state.content}
-            </p>
+            <Row>
+                <Col>
+                    <p className='loading'>
+                        {this.state.content}
+                    </p>
+                </Col>
+            </Row>
         )
-
     }
 }
 

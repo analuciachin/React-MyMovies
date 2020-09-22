@@ -16,7 +16,7 @@ export default function Login ({ login, onGetUsername, onGetPassword, username, 
             </Row>
             <Row>
                 <Col>
-                    <p className='center-text login-error'>{ login_error !== '' ? login_error : null }</p>
+                    <p className='center-text login-error mt-2 mb-2'>{ login_error !== '' ? login_error : null }</p>
                 </Col>
             </Row>
 
