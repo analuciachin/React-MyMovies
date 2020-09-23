@@ -10,7 +10,7 @@ import Logout from './Logout'
 import { fetchMovieReview, simulateLogin } from '../utils/api'
 import { Route, withRouter, Switch } from 'react-router-dom'
 import { FaStar } from 'react-icons/fa'
-import 'bootstrap/dist/css/bootstrap.min.css'
+//import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container } from 'react-bootstrap'
 
 

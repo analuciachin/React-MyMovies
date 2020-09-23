@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaCheckCircle, FaRegCalendarAlt, FaRegUser } from 'react-icons/fa'
 import { IoIosArrowDropdownCircle, IoIosArrowDropupCircle } from 'react-icons/io'
-import { Row, Col, Card, Form, Button } from 'react-bootstrap'
+import { Row, Col, Card } from 'react-bootstrap'
 
 export default function Watched ({ movies, onShowMenu, onChangeStatusToWishList, onGetRate, onHandleSubmitRate, temp_rate, onDisplayStarRate }) {
 
@@ -13,9 +13,8 @@ return (
                     const { display_title, opening_date, byline, summary_short, link, isSelected, isWatchedDisabled, status, rate } = movie
                     const { url } = link
                     return ( status === 'watched' &&
-                            <Card className='movie bg-light'>
-                                <li key={url}>
-                                
+                            <Card className='movie-watched bg-light'>
+                                <li key={url}>                           
                                     { isSelected
                                         ? (
                                         <button id={url} className='arrow-btn' onClick={(event) => onShowMenu(event, movie)}>
@@ -70,8 +69,8 @@ return (
                                                 <form onSubmit={(event) => onHandleSubmitRate(event, movie)}>
                                                     <label>My Rate: </label>
                                                     <input type='number' id='my-rate' min='1' max='5' 
-                                                        className='my-rate-control' value={temp_rate} onChange={onGetRate} />
-                                                    <input type='submit' />
+                                                        className='my-rate-input' value={temp_rate} onChange={onGetRate} />
+                                                    <input type='submit' className='my-rate-button'/>
                                                 </form>
                                             </div>    
                                         : <div className='div-my-rate'>
