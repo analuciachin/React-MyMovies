@@ -311,6 +311,39 @@ margin-left: 8px;
 
 
 /* Media Queries */
+
+@media (min-width: 1281px) {
+
+  .star {
+    font-size: 40px;
+  }
+  
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+  .star {
+    font-size: 40px;
+  }
+  
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  .star {
+    font-size: 40px;
+  }
+  
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+  .star {
+    font-size: 40px;
+  }
+  
+}
+
 @media (min-width: 320px) and (max-width: 480px) {
   #movie-date-byline {
     display: none;
@@ -326,23 +359,18 @@ margin-left: 8px;
 
   .movie-title {
     margin: 0 0 30px 0;
-    font-size: 1.7em;
+    font-size: 2em;
   }
 
   .movie-summary {
     margin-top: 1.5rem;
     margin-bottom: 1rem;
-    font-size: 1em;
+    font-size: 1.1em;
     font-weight: bold;
   }
 
-/*
-  .movie-review {
-    position: absolute;
-    bottom: 0;
-    right: 40%;
-    margin-bottom: 1rem;
-  
+  .star {
+    font-size: 30px;
   }
-*/
+
 }

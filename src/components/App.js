@@ -126,7 +126,7 @@ class App extends React.Component {
     let stars=[]
 
     for(let i=0; i<rate; i++) {
-      stars.push(<FaStar key={i} color='#ffd700' size={34}/>)
+      stars.push(<FaStar key={i} color='#ffd700' className='star' />)
     }
   return <div>{stars}</div>
   }
