@@ -206,28 +206,6 @@ margin-left: 8px;
   text-align: center;
 }
 
-/*
-.search-label {
-  font-size: 16px;
-  margin-right: 5px; 
-}
-*/
-/*
-.search-input {
-  margin-right: 15px;
-  padding: 5px;
-}
-*/
-/*
-.form-submit {
-  padding: 8px 14px;
-  cursor: pointer;
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-}
-*/
-
 .no-data {
   font-size: 22px;
   font-weight: bold;
@@ -312,18 +290,43 @@ margin-left: 8px;
 
 /* Media Queries */
 
+
 @media (min-width: 1281px) {
 
+  .movie-title {
+    margin: 0 0 30px 0;
+    font-size: 1.6em;
+  }
+
+  .movie-summary {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1em;
+    font-weight: bold;
+  }
+
   .star {
-    font-size: 40px;
+    font-size: 35px;
   }
   
 }
 
 @media (min-width: 1025px) and (max-width: 1280px) {
 
+  .movie-title {
+    margin: 0 0 30px 0;
+    font-size: 1.6em;
+  }
+
+  .movie-summary {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1em;
+    font-weight: bold;
+  }
+
   .star {
-    font-size: 40px;
+    font-size: 35px;
   }
   
 }
@@ -359,13 +362,13 @@ margin-left: 8px;
 
   .movie-title {
     margin: 0 0 30px 0;
-    font-size: 2em;
+    font-size: 1.5em;
   }
 
   .movie-summary {
     margin-top: 1.5rem;
     margin-bottom: 1rem;
-    font-size: 1.1em;
+    font-size: 1em;
     font-weight: bold;
   }
 
