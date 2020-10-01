@@ -13,8 +13,8 @@ return (
                     const { display_title, opening_date, byline, summary_short, link, isSelected, isWishListDisabled, isWatchedDisabled, rate } = movie
                     const { url } = link
                     return (
-                        <Card className='movie bg-light'>
-                            <li key={url} >
+                        <Card key={url} className='movie bg-light'>
+                            <li>
                                 { isSelected
                                     ? (
                                     <button id={url} className='arrow-btn' onClick={(event) => onShowMenu(event, movie)}>

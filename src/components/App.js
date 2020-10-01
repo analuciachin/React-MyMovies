@@ -154,10 +154,10 @@ class App extends React.Component {
     if(day<10 && month<10) {
       maxDate = year + '-0' + month + '-0' + day
     }
-    else if(day<10 && month>10) {
+    else if(day<10 && month>=10) {
       maxDate = year + '-' + month + '-0' + day
     }
-    else if(day>10 && month<10) {
+    else if(day>=10 && month<10) {
       maxDate = year + '-0' + month + '-' + day
     }
     else {
