@@ -9,28 +9,11 @@ body {
 }
 
 ul {
-	padding:0;
+	padding: 0;
 }
 
 li {
 	list-style-type: none;
-}
-
-.container {
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 50px;
-}
-
-.flex-center {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.btn-clear {
-	border: none;
-	background: transparent;
 }
 
 .nav-link {
@@ -48,7 +31,6 @@ li {
 .space-around {
   justify-content: space-around;
 }
-
 
 .bg-light {
   background: rgba(0, 0, 0, 0.08);
@@ -98,18 +80,10 @@ li {
   text-align: center;
 }
 
-.main-content {
-  height: 460px;
-}
-
 .card-list li {
   display: flex;
   align-items: center;
   margin: 10px;
-}
-
-.float-left {
-  float: left
 }
 
 .icon-margin {
@@ -126,7 +100,6 @@ li {
 .btn-status:hover {
   background: #d9d9d9;
 }
-
 
 button {
   border-style: none;
@@ -146,13 +119,6 @@ button[disabled]{
 
 .space-between {
   justify-content: space-between;
-}
-
-.nav-link {
-  font-size: 18px;
-  font-weight: bold;
-  text-decoration: none;
-  color: inherit;
 }
 
 .nav li {
@@ -193,10 +159,6 @@ margin-left: 8px;
   cursor: pointer;
 }
 
-.font-weight-bold {
-  font-weight: bold;
-}
-
 .loading {
   font-size: 35px;
   position: absolute;
@@ -227,26 +189,6 @@ margin-left: 8px;
 .login-form {
   display: inline-block;
   margin-top: 80px;
-}
-
-.login-label {
-  font-size: 20px;
-  margin: 8px;
-}
-
-.login-btn {
-  margin-top: 15px;
-  padding: 10px 18px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-}
-
-.login-input {
-  width: 30%;
-  padding: 12px 10px;
-  margin-top: 10px;
-  font-size: 16px;
 }
 
 .login-error {
@@ -280,13 +222,6 @@ margin-left: 8px;
   width: 80%;
   height: auto;
 }
-
-
-.left-text {
-  text-align: left;
-}
-
-
 
 /* Media Queries */
 

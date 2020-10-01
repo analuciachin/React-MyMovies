@@ -273,9 +273,9 @@ class App extends React.Component {
 
     if(loading === true) {
       return(
-        <div className='container'>
+        <Container>
           <Loading text='Fetching data' />
-        </div>
+        </Container>
       )
     }
 
