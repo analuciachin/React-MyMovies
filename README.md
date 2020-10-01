@@ -7,7 +7,7 @@ See the live application [here]()
 ## Application Setup
 The project uses Node.js, if you do not have it installed, you can download it here: [Node.js](https://nodejs.org/en/)
 
-* run git clone https://github.com/analuciachin/React-MyMovies to clone this repository
+* run **git clone https://github.com/analuciachin/React-MyMovies** to clone this repository
 * go into the application folder and install all modules listed as dependencies in package.json by running the command **npm install**
 * run the app in the development mode with **npm run start**
 A new browser window should automatically open displaying the app. If it does not, navigate to http://localhost:3000/ in your browser.
