@@ -1,4 +1,3 @@
-import apiConfig from './apiKeys'
 
 export function fetchMovieReview (start_date, end_date) {
 
