@@ -8,7 +8,7 @@ export default function Login ({ login, onGetUsername, onGetPassword, username, 
         <React.Fragment>
             <Row>
                 <Col>
-                    <h1 className='center-text login-h1'>Login Form</h1>
+                    <h1 className='center-text login-h1 mt-4'>Login Form</h1>
                     <div className='center login-img'>
                         <img src={require('../images/login_img.svg')} alt='Login' className='login-img'/>
                     </div>
@@ -24,7 +24,7 @@ export default function Login ({ login, onGetUsername, onGetPassword, username, 
                 <Col>
                     <Form method='post' className='center-text' onSubmit={login}>
                         <Form.Group controlId='formBasicLogin'>
-                            <Form.Label className='d-flex align-items-start'>Username</Form.Label>
+                            <Form.Label className='d-flex align-items-start mt-3'>Username</Form.Label>
                             <Form.Control type='username' placeholder='Enter username' className='mt-3 mb-3' onChange={onGetUsername} value={username} />
                             <Form.Label className='d-flex align-items-start'>Password</Form.Label>
                             <Form.Control type='password' placeholder='Enter password' className='mt-3 mb-5' onChange={onGetPassword} value={password} />

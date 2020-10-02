@@ -10,7 +10,7 @@ export default function Nav () {
     return (
         <Row>
             <Col>
-                <nav className='row space-between mb-3'>
+                <nav className='row space-between mb-3 ml-2'>
                     <ul className='row nav'>
                         <li>
                             <NavLink

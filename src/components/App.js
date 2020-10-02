@@ -333,7 +333,7 @@ class App extends React.Component {
                       onShowMenu={this.showMenu}
                       onDisplayStarRate={this.displayStarRate}
                     />
-                  : <p className='no-data mt-3'>No reviews for the chosen period.</p>
+                  : <p className='no-data mt-3 ml-2'>No reviews for the chosen period.</p>
                 }
             </div>
             )} />

@@ -5,7 +5,7 @@ export default function Logout ({ logout }) {
     return (
         <Row>
             <Col>
-                <button className='logout-btn' onClick={logout}>Logout</button>
+                <button className='logout-btn mt-3 ml-2' onClick={logout}>Logout</button>
             </Col>
         </Row>
     )

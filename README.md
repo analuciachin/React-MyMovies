@@ -2,7 +2,7 @@
 
 MyMovies is a project that I created to practice coding with React. The goal of this project was to develop an application where the user can load up to 20 movies picked by the critics according to the date range. Each card represents a movie with its title, opening date in US, summary of the review and a link to the review itself. After the movies are loaded, the user can choose moving it to *wish list* or *watched*. If a movie is already watched, the user can give his own rate to it. The application works across all devices (mobile, tablet and desktop).
 
-See the live application [here]()
+See the live application [here](https://mymovies-analuciachin.netlify.app/)
 
 ## Application Setup
 The project uses Node.js, if you do not have it installed, you can download it here: [Node.js](https://nodejs.org/en/)
@@ -13,9 +13,10 @@ The project uses Node.js, if you do not have it installed, you can download it h
 A new browser window should automatically open displaying the app. If it does not, navigate to http://localhost:3000/ in your browser.
 
 ## Features
-1. Choose the period range of the NYT Movie Review
-2. The movies will be loaded in the *All* tab. After all the movies are loaded, the user can change its status to *Wish List* or *Watched*
-3. Once the movie status is watched, the user can give his/her own rate to it (from 1 to 5 stars)
+1. Login to the page (username: abc / password: 123)
+2. In the *Search* tab, choose the date range of the NYT Movie Review
+3. The movies will be loaded in the *All* tab. After all the movies are loaded, the user can change its status to *Wish List* or *Watched*
+4. Once the movie is watched, the user can give his/her own rate to it (from 1 to 5 stars)
 
 ## Resources and Documentation
 * [create-react-app documentation](https://github.com/facebook/create-react-app)
